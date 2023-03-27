@@ -20,6 +20,9 @@ const AdminSideBar = () => {
                         <NavLink to="/admin/equipo" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="archive">Equipo</CDBSidebarMenuItem>
                         </NavLink>
+                        <NavLink to="/admin/configuracion" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="wrench">Configuración</CDBSidebarMenuItem>
+                        </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 
