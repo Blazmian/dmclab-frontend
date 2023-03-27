@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CDBBox, CDBBtn, CDBCard, CDBCardBody, CDBContainer, CDBIcon, CDBModal, CDBModalBody, CDBModalFooter, CDBModalHeader, CDBSwitch, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
+import { CDBBadge, CDBBox, CDBBtn, CDBCard, CDBCardBody, CDBContainer, CDBIcon, CDBModal, CDBModalBody, CDBModalFooter, CDBModalHeader, CDBSwitch, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useEffect, useState } from "react"
 
 const ShowUsers = () => {
@@ -36,7 +36,7 @@ const ShowUsers = () => {
 
             <CDBContainer>
                 <CDBModal isOpen={state.modal1} toggle={toggle(1)} centered fade disableBackdrop>
-                    <CDBModalHeader toggle={toggle(1)}>{user.name}</CDBModalHeader>
+                    <CDBModalHeader>{user.name}</CDBModalHeader>
                     <CDBModalBody>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -57,6 +57,7 @@ const ShowUsers = () => {
                     <CDBTableHeader>
                         <tr>
                             <th>ID</th>
+                            <th>Usuario</th>
                             <th>Nombres</th>
                             <th>Primer Apellido</th>
                             <th>Segundo Apellido</th>
@@ -67,6 +68,7 @@ const ShowUsers = () => {
                         {users.map((user) => (
                             <tr key={user.id} onClick={toggle({ nr: 1, user: user})}>
                                 <td>{user.id}</td>
+                                <td><CDBIcon  icon="chalkboard-teacher" /></td>
                                 <td>{user.name}</td>
                                 <td>{user.first_last_name}</td>
                                 <td>{user.second_last_name}</td>

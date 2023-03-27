@@ -22,6 +22,7 @@ const ShowEquipment = () => {
                     <CDBTableHeader>
                         <tr>
                             <th>ID</th>
+                            <th>Tipo</th>
                             <th>Número</th>
                             <th>Equipo</th>
                             <th>Marca</th>
