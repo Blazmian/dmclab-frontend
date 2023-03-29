@@ -1,6 +1,6 @@
-import { CDBBox, CDBBtn, CDBIcon, CDBInput, CDBSwitch } from "cdbreact"
-import { useRef, useState } from "react"
-import { Accordion, Button, Container, Form, InputGroup, Overlay, Tooltip } from "react-bootstrap"
+import { CDBBox, CDBIcon, CDBInput } from "cdbreact"
+import { useState } from "react"
+import { Accordion, Button } from "react-bootstrap"
 import { toast } from "react-toastify"
 
 const TypeUser = ({ idUser, admin, setAdmin, receptionist, setReceptionist }) => {
@@ -15,8 +15,9 @@ const TypeUser = ({ idUser, admin, setAdmin, receptionist, setReceptionist }) =>
         if (type === 'admin') {
             setWidthCAdmin('none')
             setWidthLAdmin('')
-            let toEncode = `${btoa('admin/' + idUser)}`
-            setEncodedURLA(uri + toEncode)
+            let encodeDestinyRoute = `${btoa('admin')}`
+            let userRoute = `${btoa(idUser)}`
+            setEncodedURLA(uri + encodeDestinyRoute + "/" + userRoute)
         }
     }
 

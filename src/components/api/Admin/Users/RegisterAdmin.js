@@ -2,13 +2,12 @@ import axios from "axios"
 import { CDBBox, CDBIcon } from "cdbreact"
 import { useEffect, useState } from "react"
 import { Button, Container, Form, Navbar } from "react-bootstrap"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import { validUserName } from "../../../../tools/InputValidator"
 
-const RegisterAdmin = () => {
+const RegisterAdmin = ({ id }) => {
 
-    const { id } = useParams()
     const [user, setUser] = useState(null)
     const navigate = useNavigate()
 
@@ -20,7 +19,6 @@ const RegisterAdmin = () => {
         const res = await axios.get('http://localhost:8000/staff/one/' + id)
         setUser(res.data)
     }
-
 
     const CreateAdmin = () => {
         const [form, setForm] = useState({})
