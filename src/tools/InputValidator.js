@@ -6,3 +6,12 @@ export const onlyLetters = (value) => {
     }
     return isValid
 }
+
+export const validUserName = (value) => {
+    let isValid = false
+    const regex = /^[\p{L}\p{N}\.\-_]+$/u
+    if (regex.test(value)) {
+        isValid = true
+    }
+    return isValid
+}

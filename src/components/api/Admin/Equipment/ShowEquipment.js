@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
+import { CDBBadge, CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useEffect, useState } from "react"
 
 const ShowEquipment = () => {
@@ -34,10 +34,7 @@ const ShowEquipment = () => {
                     <CDBTableBody>
                         {equipment.map((equipment) => (
                             <tr key={equipment.id}>
-                                <td>{equipment.id}</td>
-                                <td>{equipment.name}</td>
-                                <td>{equipment.first_last_name}</td>
-                                <td>{equipment.second_last_name}</td>
+                                
                             </tr>
                         ))}
                     </CDBTableBody>

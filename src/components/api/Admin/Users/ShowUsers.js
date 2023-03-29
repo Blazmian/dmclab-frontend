@@ -1,59 +1,84 @@
 import axios from "axios"
 import { CDBAccordion, CDBBox, CDBBtn, CDBContainer, CDBIcon, CDBModal, CDBModalBody, CDBModalFooter, CDBModalHeader, CDBSwitch, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useEffect, useState } from "react"
+import { Accordion, Button, Form, Modal } from "react-bootstrap"
+import { toast } from "react-toastify"
+import Swal from "sweetalert2"
 import BadgesUsers from "./BadgesUsers"
+import TypeUser from "./UserTypeModal"
 
-const ShowUsers = ({users, setUsers}) => {
+const ShowUsers = ({ users, setUsers }) => {
 
     const [user, setUser] = useState([])
-    const [state, setState] = useState({
-        modal1: false,
-    })
+    const [admin, setAdmin] = useState([])
+    const [receptionist, setReceptionist] = useState([])
 
+    async function getUsers() {
+        const res = await axios.get('http://localhost:8000/staff/all')
+        setUsers(res.data)
+    }
 
-    const toggle = data => () => {
-        let modalNumber = 'modal' + data.nr
+    // For modal component
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
+    const modalController = (data) => {
         setUser(data.user)
-        setState({
-            ...state,
-            [modalNumber]: !state[modalNumber],
+        setAdmin(data.user.admin)
+        setReceptionist(data.user.receptionist)
+        if (!data.delete) {
+            handleShow()
+        } else {
+            confirmDeleteUser(data.user)
+        }
+    }
+
+    const confirmDeleteUser = (user) => {
+        Swal.fire({
+            title: '¿Estas seguro de eliminar el usuario ' + user.name + '?',
+            text: "Esto no se podrá revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar usuario',
+            confirmButtonColor: '#f53333',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((response) => {
+            if (response.isConfirmed) {
+                deleteUser(user.id)
+            }
         })
     }
 
-    const data = [
-        {
-            title: 'Administrador',
-            content:
-                <CDBContainer fluid className="mt-3">
-                    <CDBBox display="flex" flex="fill">
-                        <CDBBox justifyContent="start" display="flex">Hacer Administrador</CDBBox>
-                        <CDBBox justifyContent="end" display="flex" flex="fill">
-                            <CDBSwitch />
-                        </CDBBox>
-                    </CDBBox>
-                </CDBContainer>,
-        },
-        {
-            title: 'Casetero',
-            content: ` nibh, sollicitudin fringilla ante placerat eget. In in vulputate neque. Mputate tellus ut sodales interdum. Nam non diam aliquam, iaculis enim vitae, imperdiet eros. Praesent lacinia pretium ante, quis rhon Donec sed lectus diam. Quisque a vehicula tortor, at viverra quam. Vecus ex auris eu tortor in est porttitor efficiturFusce sit amet purus id lacCurabitur posuere ligulaus rutrum dapibus. Fusce et dictum nisi, in vs lacus. Nam sit amet mauris ut sapien varius tincidunt in in velit.stibolutpat leo. in vel risus. Aliquam dignissim lectus sit amet odio malesuada eleifend. Quisque ligula erat, vestibulum vel massa nec, lobortis convalliulum posuere sem eu erat egestas, ut tempor sem ultrices. Curabitur vulaliquam vitae. Maecenas et eros nec leo ultrices rhoncus eget ac odio.`,
+    const deleteUser = async (id) => {
+        const res = await axios.delete('http://localhost:8000/staff/delete/' + id)
+        if (res.data.affected === 1) {
+            toast.info('Usuario eliminado con exito')
+            getUsers()
+        } else {
+            toast.error('No se pudo eliminar el usuario')
         }
-    ]
+    }
 
     return (
         <>
-            <CDBContainer>
-                <CDBModal isOpen={state.modal1} toggle={toggle({ nr: 1, user: user })} centered fade disableBackdrop>
-                    <CDBModalHeader>{user.name + " " + user.first_last_name + " " + user.second_last_name}</CDBModalHeader>
-                    <CDBModalBody>
-                        <CDBAccordion data={data} />
-                    </CDBModalBody>
-                    <CDBModalFooter>
-                        <CDBBtn color="dark" flat onClick={toggle({ nr: 1, user: user })}>Cancelar</CDBBtn>
-                        <CDBBtn color="primary" flat>Guardar cambios</CDBBtn>
-                    </CDBModalFooter>
-                </CDBModal>
-            </CDBContainer>
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>{user.name + " " + user.first_last_name + " " + user.second_last_name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <TypeUser idUser={user.id} admin={admin} setAdmin={setAdmin} receptionist={receptionist} setReceptionist={setReceptionist} />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Guardar cambios
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <CDBContainer>
                 <CDBTable striped hover bordered responsive maxHeight="70vh" scrollY>
                     <CDBTableHeader>
@@ -68,16 +93,29 @@ const ShowUsers = ({users, setUsers}) => {
                     </CDBTableHeader>
                     <CDBTableBody>
                         {users.map((user) => (
-                            <tr key={user.id} onClick={toggle({ nr: 1, user: user })}>
-                                <td style={{ textAlign: 'center' }}>{user.id}</td>
-                                <td style={{ textAlign: 'center' }}><BadgesUsers user={user} /></td>
-                                <td>{user.name}</td>
-                                <td>{user.first_last_name}</td>
-                                <td>{user.second_last_name}</td>
+                            <tr key={user.id}>
+                                <td style={{ textAlign: 'center' }} onClick={() => modalController({ user: user, delete: false })}>{user.id}</td>
+                                <td style={{ textAlign: 'center' }} onClick={() => modalController({ user: user, delete: false })}><BadgesUsers user={user} /></td>
+                                <td onClick={() => modalController({ user: user, delete: false })}>{user.name}</td>
+                                <td onClick={() => modalController({ user: user, delete: false })}>{user.first_last_name}</td>
+                                <td onClick={() => modalController({ user: user, delete: false })}>{user.second_last_name}</td>
                                 <td style={{ textAlign: 'center' }}>
                                     <CDBBox display="flex" justifyContent="center">
-                                        <CDBBtn color="danger" className="me-1" style={{ borderRadius: '10px' }}><CDBIcon icon="trash" /></CDBBtn>
-                                        <CDBBtn color="info" className="ms-1" style={{ borderRadius: '10px' }}><CDBIcon icon="edit" /></CDBBtn>
+                                        <CDBBtn
+                                            color="danger"
+                                            className="me-1"
+                                            style={{ borderRadius: '10px' }}
+                                            onClick={() => modalController({ user: user, delete: true })}
+                                        >
+                                            <CDBIcon icon="trash" />
+                                        </CDBBtn>
+                                        <CDBBtn
+                                            color="info"
+                                            className="ms-1"
+                                            style={{ borderRadius: '10px' }}
+                                        >
+                                            <CDBIcon icon="edit" />
+                                        </CDBBtn>
                                     </CDBBox>
                                 </td>
                             </tr>

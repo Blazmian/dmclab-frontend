@@ -5,6 +5,7 @@ import Login from './components/Login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminMain from './components/AdminMain';
 import { ToastContainer } from 'react-toastify';
+import RegisterAdmin from './components/api/Admin/Users/RegisterAdmin';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/admin/*' element={<AdminMain />} />
+          <Route path="/register/admin/:id" element={<RegisterAdmin />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer

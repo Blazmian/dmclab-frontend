@@ -103,13 +103,13 @@ const Users = () => {
     return (
         <>
             <NavBarAdmin icon={'users'} title={'Usuarios'} />
-            <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Agregar Usuarios</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-3">
                             <Form.Label>Nombres</Form.Label>
                             <Form.Control
                                 required
@@ -125,7 +125,7 @@ const Users = () => {
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-3">
                             <Form.Label>Primer apellido</Form.Label>
                             <Form.Control
                                 required
@@ -141,7 +141,7 @@ const Users = () => {
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-3">
                             <Form.Label>Segundo apellido</Form.Label>
                             <Form.Control
                                 required
