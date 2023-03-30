@@ -5,6 +5,7 @@ import { Button, Modal } from "react-bootstrap"
 import { toast } from "react-toastify"
 import Swal from "sweetalert2"
 import BadgesUsers from "./BadgesUsers"
+import EditUser from "./EditUser"
 import TypeUser from "./UserTypeModal"
 
 const ShowUsers = ({ users, setUsers }) => {
@@ -23,14 +24,21 @@ const ShowUsers = ({ users, setUsers }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // For edit modal component
+    const [showModal, setShowModal] = useState(false);
+    const handleCloseEdit = () => setShowModal(false);
+    const handleShowEdit = () => setShowModal(true);
+
     const modalController = (data) => {
         setUser(data.user)
         setAdmin(data.user.admin)
         setReceptionist(data.user.receptionist)
-        if (!data.delete) {
+        if (!data.delete && !data.update) {
             handleShow()
-        } else {
+        } else if (data.delete) {
             confirmDeleteUser(data.user)
+        } else {
+            handleShowEdit()
         }
     }
 
@@ -63,22 +71,20 @@ const ShowUsers = ({ users, setUsers }) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered size="lg">
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{user.name + " " + user.first_last_name + " " + user.second_last_name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <TypeUser idUser={user.id} admin={admin} setAdmin={setAdmin} receptionist={receptionist} setReceptionist={setReceptionist} />
+                    <TypeUser user={user} admin={admin} receptionist={receptionist} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cerrar
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Guardar cambios
-                    </Button>
                 </Modal.Footer>
             </Modal>
+            <EditUser showModal={showModal} handleClose={handleCloseEdit} />
             <CDBContainer>
                 <CDBTable striped hover bordered responsive maxHeight="70vh" scrollY>
                     <CDBTableHeader>
@@ -94,28 +100,22 @@ const ShowUsers = ({ users, setUsers }) => {
                     <CDBTableBody>
                         {users.map((user) => (
                             <tr key={user.id}>
-                                <td style={{ textAlign: 'center' }} onClick={() => modalController({ user: user, delete: false })}>{user.id}</td>
-                                <td style={{ textAlign: 'center' }} onClick={() => modalController({ user: user, delete: false })}><BadgesUsers user={user} /></td>
-                                <td onClick={() => modalController({ user: user, delete: false })}>{user.name}</td>
-                                <td onClick={() => modalController({ user: user, delete: false })}>{user.first_last_name}</td>
-                                <td onClick={() => modalController({ user: user, delete: false })}>{user.second_last_name}</td>
+                                <td style={{ textAlign: 'center' }} onClick={() => modalController({ user: user, delete: false, update: false })}>{user.id}</td>
+                                <td style={{ textAlign: 'center' }} onClick={() => modalController({ user: user, delete: false, update: false })}><BadgesUsers user={user} /></td>
+                                <td onClick={() => modalController({ user: user, delete: false, update: false })}>{user.name}</td>
+                                <td onClick={() => modalController({ user: user, delete: false, update: false })}>{user.first_last_name}</td>
+                                <td onClick={() => modalController({ user: user, delete: false, update: false })}>{user.second_last_name}</td>
                                 <td style={{ textAlign: 'center' }}>
                                     <CDBBox display="flex" justifyContent="center">
                                         <CDBBtn
                                             color="danger"
                                             className="me-1"
                                             style={{ borderRadius: '10px' }}
-                                            onClick={() => modalController({ user: user, delete: true })}
+                                            onClick={() => modalController({ user: user, delete: true, update: false })}
                                         >
                                             <CDBIcon icon="trash" />
                                         </CDBBtn>
-                                        <CDBBtn
-                                            color="info"
-                                            className="ms-1"
-                                            style={{ borderRadius: '10px' }}
-                                        >
-                                            <CDBIcon icon="edit" />
-                                        </CDBBtn>
+                                        
                                     </CDBBox>
                                 </td>
                             </tr>
@@ -128,3 +128,14 @@ const ShowUsers = ({ users, setUsers }) => {
 }
 
 export default ShowUsers
+
+/*
+<CDBBtn
+                                            color="info"
+                                            className="ms-1"
+                                            style={{ borderRadius: '10px' }}
+                                            onClick={() => modalController({ user: user, delete: false, update: true })}
+                                        >
+                                            <CDBIcon icon="edit" />
+                                        </CDBBtn>
+*/

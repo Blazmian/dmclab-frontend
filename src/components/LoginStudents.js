@@ -2,7 +2,7 @@ import { CDBBox, CDBBtn, CDBCard, CDBCardBody, CDBContainer, CDBInput } from "cd
 import LogoITH from '../img/ITH.png'
 import MainNavBar from "./MainNavBar"
 
-const Login = () => {
+const LoginStudents = () => {
     return (
         <>
             <div className='header-main'>
@@ -37,4 +37,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginStudents

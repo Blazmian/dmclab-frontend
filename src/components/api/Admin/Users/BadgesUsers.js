@@ -17,7 +17,7 @@ const BadgesUsers = (props) => {
             )
         }
     } else {
-        if (props.user.eceptionist) {
+        if (props.user.receptionist) {
             return (
                 <>
                     <CDBIcon icon="chalkboard-teacher" />
