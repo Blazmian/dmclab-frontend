@@ -1,15 +1,23 @@
 import axios from "axios"
 import { CDBBox, CDBBtn, CDBCard, CDBCardBody, CDBContainer } from "cdbreact"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Container, Form, FormGroup, Navbar } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import LogoITH from '../img/ITH.png'
+import { checkAuth } from "../config/Auth"
 
 const Login = () => {
 
+    const [authenticated, setAuthenticated] = useState(checkAuth());
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
+
+    useEffect(() => {
+        if (authenticated) {
+            navigate("/admin/reportes")
+        }
+    }, [authenticated])
 
     const navigate = useNavigate()
 
@@ -37,8 +45,10 @@ const Login = () => {
                     }
                 })
             if (res.status === 201) {
-                toast.success('Bienvenido!')
+                toast.success(`¡Bienvenido de nuevo ${res.data.user.staff.name}!`)
+                localStorage.setItem('user', res.data.user.username)
                 localStorage.setItem('token', res.data.token)
+                setAuthenticated(true)
                 navigate('/admin/reportes')
             }
         } else {

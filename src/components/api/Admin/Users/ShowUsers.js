@@ -128,14 +128,3 @@ const ShowUsers = ({ users, setUsers }) => {
 }
 
 export default ShowUsers
-
-/*
-<CDBBtn
-                                            color="info"
-                                            className="ms-1"
-                                            style={{ borderRadius: '10px' }}
-                                            onClick={() => modalController({ user: user, delete: false, update: true })}
-                                        >
-                                            <CDBIcon icon="edit" />
-                                        </CDBBtn>
-*/
