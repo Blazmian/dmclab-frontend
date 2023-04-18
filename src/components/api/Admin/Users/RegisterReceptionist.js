@@ -1,22 +1,24 @@
 import axios from "axios"
 import { CDBBox, CDBIcon } from "cdbreact"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Container, Form, Navbar } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import { validUserName } from "../../../../tools/InputValidator"
+import { ApiUrls } from "../../ApiUrls"
 
 const RegisterReceptionist = ({id}) => {
 
     const [user, setUser] = useState(null)
     const navigate = useNavigate()
+    const urls = useContext(ApiUrls)
 
     useEffect(() => {
         getUser()
     }, [])
 
     const getUser = async () => {
-        const res = await axios.get('http://localhost:8000/staff/one/' + id)
+        const res = await axios.get(urls.obtainStaff + id)
         setUser(res.data)
     }
 
@@ -66,13 +68,13 @@ const RegisterReceptionist = ({id}) => {
         }
 
         const createReceptionist = async () => {
-            const res = await axios.post('http://localhost:8000/receptionist/' + id,
+            const res = await axios.post(urls.addUser + id + '/receptionist',
                 {
                     username: form.username,
                     password: form.password
                 }
             )
-            if (res.data === true) {
+            if (res.status === 201) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Tu registro ha sido exitoso',
@@ -162,7 +164,7 @@ const RegisterReceptionist = ({id}) => {
 
     return (
         <>
-            {user && (user.receptionist !== null ? <ReceptionistAlreadyCreated /> : <CreateReceptionist />)}
+            {user && (user.receptionist ? <ReceptionistAlreadyCreated /> : <CreateReceptionist />)}
         </>
     )
 }

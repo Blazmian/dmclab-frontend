@@ -1,14 +1,15 @@
 import axios from "axios";
 import { CDBBox, CDBBtn, CDBContainer, CDBIcon, CDBInput } from "cdbreact";
-import React, { useEffect, useState } from "react";
-import { Button, Collapse, Form, Modal } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { onlyLetters } from "../../../../tools/InputValidator";
+import React, { useContext, useEffect, useState } from "react";
+import { Collapse } from "react-bootstrap";
 import NavBarAdmin from "../NavBarAdmin";
 import ShowUsers from "./ShowUsers";
-import AddUser from "./AddUser";
+import CreateUser from "./CreateUser";
+import { ApiUrls } from "../../ApiUrls";
 
 const Users = ({ user }) => {
+
+    const urls = useContext(ApiUrls)
 
     // Data of users table
     const [users, setUsers] = useState([])
@@ -19,7 +20,7 @@ const Users = ({ user }) => {
 
     async function getUsers() {
         if (user) {
-            const res = await axios.get('http://localhost:8000/staff/all/' + user.staff.id)
+            const res = await axios.get(urls.staff + user.staff.id)
             setUsers(res.data)
         }
     }
@@ -36,14 +37,14 @@ const Users = ({ user }) => {
         setShow(false)
     }
 
-    const handleAddUser = () => {
+    const handleUpdateUsers = () => {
         getUsers()
     }
 
     return (
         <>
             <NavBarAdmin icon={'users'} title={'Usuarios'} />
-            <AddUser show={show} handleClose={handleClose} handleAddUser={handleAddUser} />
+            <CreateUser show={show} handleClose={handleClose} handleAddUser={handleUpdateUsers} />
             <CDBContainer className="mt-5 mb-3">
                 <CDBBox display="flex">
                     <CDBBox display="flex" justifyContent="start">
@@ -74,7 +75,7 @@ const Users = ({ user }) => {
                     </CDBContainer>
                 </Collapse>
             </CDBContainer>
-            <ShowUsers users={users} setUsers={setUsers} />
+            <ShowUsers users={users} setUsers={setUsers} handleUpdateUsers={handleUpdateUsers} />
         </>
     )
 }

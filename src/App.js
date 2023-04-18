@@ -19,7 +19,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/admin/*' element={<AdminMain />} />
           <Route path='/' element={<LoginStudents />} />
-          <Route exact path="/register/:destiny/:id" element={<Register />} />
+          <Route exact path="/register/:type/:id" element={<Register />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer

@@ -3,15 +3,14 @@ import RegisterAdmin from "./RegisterAdmin"
 import RegisterReceptionist from "./RegisterReceptionist"
 
 const Register = () => {
-    const { destiny, id } = useParams()
-
+    const { type, id } = useParams()
     const idUser = atob(id)
 
-    if (atob(destiny) === 'admin') {
+    if (atob(type) === 'admin') {
         return (
             <RegisterAdmin id={idUser} />
         )
-    } else if (atob(destiny) === 'receptionist') {
+    } else if (atob(type) === 'receptionist') {
         return (
             <RegisterReceptionist id={idUser} />
         )

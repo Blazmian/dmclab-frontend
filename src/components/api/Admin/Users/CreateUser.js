@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import UserDefaultImg from '../../../../img/user-default-image.jpg'
 import { onlyLetters } from '../../../../tools/InputValidator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { CDBBox } from 'cdbreact';
+import { ApiUrls } from '../../ApiUrls';
 
-const AddUser = ({ show, handleClose, handleAddUser }) => {
+const CreateUser = ({ show, handleClose, handleAddUser }) => {
+
+    const urls = useContext(ApiUrls)
 
     // For form submit
     const [form, setForm] = useState({})
@@ -62,7 +65,7 @@ const AddUser = ({ show, handleClose, handleAddUser }) => {
     }
 
     const addUser = async () => {
-        const res = await axios.post('http://localhost:8000/staff',
+        const res = await axios.post(urls.addStaff,
             {
                 name: form.names,
                 first_last_name: form.firstLastName,
@@ -101,9 +104,9 @@ const AddUser = ({ show, handleClose, handleAddUser }) => {
                 <Form>
                     <CDBBox display="flex" flex="fill" justifyContent="center" className="mb-3">
                         {imagePreview ?
-                            <img src={imagePreview} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px', boxShadow: '0px 0px 5px 5px rgba(0, 0, 0, 0.25)' }} />
+                            <img src={imagePreview} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px'}} />
                             :
-                            <img src={UserDefaultImg} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px', boxShadow: '0px 0px 5px 5px rgba(0, 0, 0, 0.25)' }}></img>
+                            <img src={UserDefaultImg} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px'}}></img>
                         }
                     </CDBBox>
                     <Form.Group className="mb-3 mx-5">
@@ -172,4 +175,4 @@ const AddUser = ({ show, handleClose, handleAddUser }) => {
     )
 }
 
-export default AddUser
+export default CreateUser
