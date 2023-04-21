@@ -21,15 +21,17 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
     const obtainImageUser = async () => {
         if (user.length !== 0) {
             const res = await axios.get(urls.obtainStaffPhoto + user.id, { responseType: 'arraybuffer' })
-            let binary = '';
-            const bytes = new Uint8Array(res.data);
-            const len = bytes.byteLength;
-            for (let i = 0; i < len; i++) {
-                binary += String.fromCharCode(bytes[i]);
+            if (res.data.byteLength > 0) {
+                let binary = '';
+                const bytes = new Uint8Array(res.data);
+                const len = bytes.byteLength;
+                for (let i = 0; i < len; i++) {
+                    binary += String.fromCharCode(bytes[i]);
+                }
+                setImageUser(binary)
+            } else {
+                setImageUser(UserDefaultImg)
             }
-            const base64 = btoa(binary);
-            console.log(base64)
-            setImageUser(`data:image/png;base64, ${base64}`)
         }
     }
 
@@ -69,7 +71,7 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
             <Modal.Body>
                 <CDBContainer fluid className="mb-4">
                     <CDBBox display="flex" flex="fill" justifyContent="center">
-                        <img src={imageUser} alt="Imagen de Usuario" style={{ height: '200px', width: '200px', borderRadius: '360px' }} />
+                        <img src={imageUser} style={{ height: '200px', width: '200px', borderRadius: '360px' }} />
                     </CDBBox>
                 </CDBContainer>
                 <hr className="mx-5" />

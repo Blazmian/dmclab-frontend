@@ -1,7 +1,30 @@
 import { CDBSidebar, CDBSidebarHeader, CDBSidebarFooter, CDBSidebarContent, CDBSidebarMenu, CDBSidebarMenuItem } from "cdbreact"
-import { NavLink } from "react-router-dom"
+import { Button } from "react-bootstrap"
+import { NavLink, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import Swal from "sweetalert2"
 
 const AdminSideBar = () => {
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        Swal.fire({
+            title: '¿Estas seguro de cerrar sesion?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Cerrar sesión',
+            confirmButtonColor: '#f53333',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((response) => {
+            if (response.isConfirmed) {
+                window.localStorage.clear()
+                navigate('/')
+            }
+        })
+    }
+
     return (
         <div style={{ display: 'flex', height: '95vh', overflow: 'scroll initial' }}>
             <CDBSidebar backgroundColor="#193158" textColor="#fff" toggled>
@@ -28,7 +51,7 @@ const AdminSideBar = () => {
 
                 <CDBSidebarFooter style={{ textAlign: 'center' }}>
                     <CDBSidebarMenu>
-                        <NavLink to="/logout">
+                        <NavLink onClick={handleLogout}>
                             <CDBSidebarMenuItem icon='sign-out-alt'>Cerrar Sesión</CDBSidebarMenuItem>
                         </NavLink>
                     </CDBSidebarMenu>

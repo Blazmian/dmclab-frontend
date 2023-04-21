@@ -1,45 +1,35 @@
-import axios from "axios"
-import { CDBBadge, CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
-import { useEffect, useState } from "react"
+import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
+import BadgesEquipment from "./BadgesEquipment"
 
-const ShowEquipment = () => {
-
-    const [equipment, setEquipment] = useState([])
-
-    useEffect(() => {
-        getEquipment()
-    }, [])
-
-    const getEquipment = async () => {
-        const res = await axios.get('http://localhost:8000/equipment/all')
-        setEquipment(res.data)
-    }
+const ShowEquipment = ({ equipments, handleUpdateEquipment }) => {
 
     return (
         <>
             <CDBContainer>
                 <CDBTable striped hover bordered responsive maxHeight="70vh" scrollY>
                     <CDBTableHeader>
-                        <tr>
-                            <th>ID</th>
+                        <tr style={{ textAlign: 'center' }}>
+                            <th>Id</th>
                             <th>Tipo</th>
-                            <th>Número</th>
                             <th>Equipo</th>
+                            <th>Número</th>
                             <th>Marca</th>
                             <th>Modelo</th>
-                            <th>Número serial</th>
-                            <th>Opciones</th>
                         </tr>
                     </CDBTableHeader>
                     <CDBTableBody>
-                        {equipment.map((equipment) => (
+                        {equipments.map((equipment) => (
                             <tr key={equipment.id}>
-                                
+                                <td style={{ textAlign: 'center' }}>{equipment.id}</td>
+                                <td style={{ textAlign: 'center' }}><BadgesEquipment equipment={equipment} /></td>
+                                <td>{equipment.equipment_name}</td>
+                                <td style={{ textAlign: 'center' }}>{equipment.equipment_number}</td>
+                                <td>{equipment.brand}</td>
+                                <td>{equipment.model}</td>
                             </tr>
                         ))}
                     </CDBTableBody>
                 </CDBTable>
-
             </CDBContainer>
         </>
     )

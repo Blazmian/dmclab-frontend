@@ -11,4 +11,8 @@ export const ApiUrls = createContext({
     // Users
     addUser: 'http://localhost:8000/user/',
     deleteUser: 'http://localhost:8000/user/delete/',
+
+    // Equipment
+    equipment: 'http://localhost:8000/equipment/all',
+    addEquipment: 'http://localhost:8000/equipment/',
 })
