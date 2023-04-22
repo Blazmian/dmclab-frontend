@@ -47,7 +47,7 @@ const Equipment = () => {
                     </CDBBox>
                     <CDBBox display="flex" flex="fill" justifyContent="end">
                         <CDBInput style={{ borderRadius: '12px' }} placeholder="Buscar equipo" className="mx-3 w-50" icon={<i className="fa fa-search text-dark"></i>} />
-                        <CDBBtn style={{ borderRadius: '12px' }} outline color="dark"><CDBIcon icon="filter" className="ml-3" />Filtrar</CDBBtn>
+                        <CDBBtn style={{ borderRadius: '12px' }} color="dark"><CDBIcon icon="filter" className="me-2" />Filtrar</CDBBtn>
                     </CDBBox>
                 </CDBBox>
             </CDBContainer>

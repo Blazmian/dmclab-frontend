@@ -7,6 +7,7 @@ import Users from "./Users/UsersInterface"
 import Auth from "../../../config/Auth"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import AdminConfiguration from "./Configuration/ConfigurationInterface"
 
 const AdminMain = () => {
 
@@ -33,6 +34,7 @@ const AdminMain = () => {
                             <Route path="/usuarios/*" element={<Users user={user} />} />
                             <Route path="/equipo/*" element={<Equipment />} />
                             <Route path="/caseteros/*" />
+                            <Route path="/configuracion" element={<AdminConfiguration user={user} />} />
                         </Routes>
                     </CDBBox>
                 </CDBBox>

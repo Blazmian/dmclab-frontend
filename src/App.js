@@ -7,8 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import Register from './components/api/Admin/Users/Register';
 import LoginStudents from './components/LoginStudents';
 import Login from './components/LoginUser';
-import { useState } from 'react';
-import { checkAuth } from './config/Auth';
 
 function App() {
 
@@ -31,6 +29,7 @@ function App() {
         rtl={false}
         pauseOnFocusLoss
         draggable
+        theme='colored'
         pauseOnHover
       />
     </>

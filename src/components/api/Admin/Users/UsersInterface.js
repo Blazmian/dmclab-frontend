@@ -55,7 +55,7 @@ const Users = ({ user }) => {
                     </CDBBox>
                     <CDBBox display="flex" flex="fill" justifyContent="end">
                         <CDBInput style={{ borderRadius: '12px' }} placeholder="Buscar usuarios" className="mx-3 w-50" icon={<i className="fa fa-search text-dark"></i>} />
-                        <CDBBtn style={{ borderRadius: '12px' }} outline color="dark" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open} >
+                        <CDBBtn style={{ borderRadius: '12px' }} color="dark" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open} >
                             <CDBIcon icon="filter" className="me-2" />
                             Filtrar
                         </CDBBtn>
