@@ -48,21 +48,24 @@ const AdminSideBar = () => {
                             <CDBSidebarMenuItem icon="user-graduate">Alumnos</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink to="/admin/docentes" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
-                            <CDBSidebarMenuItem icon="archive">Docentes</CDBSidebarMenuItem>
+                            <CDBSidebarMenuItem icon="glasses">Docentes</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink to="/admin/materias" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
                             <CDBSidebarMenuItem icon="apple-alt">Materias</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink to="/admin/configuracion" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
-                            <CDBSidebarMenuItem icon="wrench">Configuración</CDBSidebarMenuItem>
                         </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 
                 <CDBSidebarFooter style={{ textAlign: 'center' }}>
                     <CDBSidebarMenu>
+                        <NavLink to="/admin/cambio-semestre" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
+                            <CDBSidebarMenuItem icon="sync">Cambio de Semestre</CDBSidebarMenuItem>
+                        </NavLink>
                         <NavLink>
                             <CDBSidebarMenuItem icon='bullhorn'>Acerca de Nosotros</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink to="/admin/configuracion" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
+                            <CDBSidebarMenuItem icon="wrench">Configuración</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink onClick={handleLogout}>
                             <CDBSidebarMenuItem icon='sign-out-alt'>Cerrar Sesión</CDBSidebarMenuItem>
