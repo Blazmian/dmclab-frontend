@@ -50,17 +50,14 @@ const AdminSideBar = () => {
                         <NavLink to="/admin/docentes" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
                             <CDBSidebarMenuItem icon="glasses">Docentes</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink to="/admin/materias" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
-                            <CDBSidebarMenuItem icon="apple-alt">Materias</CDBSidebarMenuItem>
+                        <NavLink to="/admin/cambio-semestre" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
+                            <CDBSidebarMenuItem icon="sync">Cambio de Semestre</CDBSidebarMenuItem>
                         </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 
                 <CDBSidebarFooter style={{ textAlign: 'center' }}>
                     <CDBSidebarMenu>
-                        <NavLink to="/admin/cambio-semestre" className={({ isActive }) => isActive ? 'activeClicked' : ""}>
-                            <CDBSidebarMenuItem icon="sync">Cambio de Semestre</CDBSidebarMenuItem>
-                        </NavLink>
                         <NavLink>
                             <CDBSidebarMenuItem icon='bullhorn'>Acerca de Nosotros</CDBSidebarMenuItem>
                         </NavLink>

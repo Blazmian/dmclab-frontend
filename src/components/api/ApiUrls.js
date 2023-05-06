@@ -18,4 +18,7 @@ export const ApiUrls = createContext({
     obtainEquipmentPhoto: 'http://localhost:8000/equipment/one/photo/',
     changeDamaged: 'http://localhost:8000/equipment/damaged/',
     deleteEquipment: 'http://localhost:8000/equipment/delete/',
+
+    // Career
+    validateCareers: 'http://localhost:8000/career/validate/',
 })

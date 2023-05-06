@@ -21,9 +21,9 @@ const ShowEquipment = ({ equipments, handleUpdateEquipment }) => {
         <>
             <ShowInfoEquipment show={show} handleClose={handleClose} handleUpdateEquipment={handleUpdateEquipment} equipment={equipment} />
             <CDBContainer>
-                <CDBTable striped hover bordered responsive maxHeight="70vh" scrollY>
+                <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless>
                     <CDBTableHeader>
-                        <tr style={{ textAlign: 'center' }}>
+                        <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
                             <th>Id</th>
                             <th>Tipo</th>
                             <th>Equipo</th>

@@ -21,10 +21,10 @@ const ShowUsers = ({ users, setUsers, handleUpdateUsers }) => {
         <>
             <ShowInfoUser show={show} handleClose={handleClose} handleUpdateUsers={handleUpdateUsers} user={user} />
             <CDBContainer>
-                <CDBTable striped hover bordered responsive maxHeight="70vh" scrollY>
+                <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless>
                     <CDBTableHeader>
-                        <tr style={{ textAlign: 'center' }}>
-                            <th>ID</th>
+                        <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
+                            <th>Id</th>
                             <th>Usuario</th>
                             <th>Nombres</th>
                             <th>Primer Apellido</th>
