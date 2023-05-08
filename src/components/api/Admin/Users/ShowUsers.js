@@ -21,28 +21,30 @@ const ShowUsers = ({ users, setUsers, handleUpdateUsers }) => {
         <>
             <ShowInfoUser show={show} handleClose={handleClose} handleUpdateUsers={handleUpdateUsers} user={user} />
             <CDBContainer>
-                <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless>
-                    <CDBTableHeader>
-                        <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
-                            <th>Id</th>
-                            <th>Usuario</th>
-                            <th>Nombres</th>
-                            <th>Primer Apellido</th>
-                            <th>Segundo Apellido</th>
-                        </tr>
-                    </CDBTableHeader>
-                    <CDBTableBody>
-                        {users.map((user) => (
-                            <tr key={user.id} onClick={() => handleClick(user)}>
-                                <td style={{ textAlign: 'center' }}>{user.id}</td>
-                                <td style={{ textAlign: 'center' }}><BadgesUsers user={user} /></td>
-                                <td>{user.name}</td>
-                                <td>{user.first_last_name}</td>
-                                <td>{user.second_last_name}</td>
+                <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
+                    <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
+                        <CDBTableHeader>
+                            <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
+                                <th>Id</th>
+                                <th>Usuario</th>
+                                <th>Nombres</th>
+                                <th>Primer Apellido</th>
+                                <th>Segundo Apellido</th>
                             </tr>
-                        ))}
-                    </CDBTableBody>
-                </CDBTable>
+                        </CDBTableHeader>
+                        <CDBTableBody>
+                            {users.map((user) => (
+                                <tr key={user.id} onClick={() => handleClick(user)}>
+                                    <td style={{ textAlign: 'center' }}>{user.id}</td>
+                                    <td style={{ textAlign: 'center' }}><BadgesUsers user={user} /></td>
+                                    <td>{user.name}</td>
+                                    <td>{user.first_last_name}</td>
+                                    <td>{user.second_last_name}</td>
+                                </tr>
+                            ))}
+                        </CDBTableBody>
+                    </CDBTable>
+                </div>
             </CDBContainer>
         </>
     )

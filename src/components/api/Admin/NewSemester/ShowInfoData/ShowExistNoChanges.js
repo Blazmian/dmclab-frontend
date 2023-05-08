@@ -1,7 +1,7 @@
-import { CDBBox, CDBIcon, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
-import { Button, Modal } from "react-bootstrap"
+import { CDBBox, CDBIcon, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact";
+import { Button, Modal } from "react-bootstrap";
 
-const ShowNoExistentData = ({ show, handleClose, data, title }) => {
+const ShowExistNoChanges = ({ show, handleClose, data, title }) => {
 
     const columnSet = new Set();
 
@@ -17,17 +17,17 @@ const ShowNoExistentData = ({ show, handleClose, data, title }) => {
         <>
             <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered size="xl">
                 <Modal.Header closeButton>
-                    <Modal.Title>{title} no existentes</Modal.Title>
+                    <Modal.Title>{title} existentes pero sin cambios</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="px-5 pb-4">
                     <CDBBox display="flex" flex="fill" alignItems="center" className="mx-5 mb-4 mt-2">
                         <CDBIcon icon="info-circle" size="lg" />
-                        <h6 className="m-0 ms-4">Este es un listado de los datos que pueden ser insertados en la base de datos y no presentarán ningún cambio ni modificación de los registros ya existentes</h6>
+                        <h6 className="m-0 ms-4">Este es un listado de los datos que no serán insertados en la base de datos debido a que ya existen en el sistema y el insertarlos podrá ocasionar problemas a futuro</h6>
                     </CDBBox>
                     <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
                         <CDBTable striped hover responsive maxHeight="50vh" scrollY borderless className="mb-0">
                             <CDBTableHeader>
-                                <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
+                                <tr style={{ textAlign: 'center', backgroundColor: '#dc3444', color: 'white' }}>
                                     {columns.map((column) => (
                                         <th key={column}>{column}</th>
                                     ))}
@@ -56,4 +56,4 @@ const ShowNoExistentData = ({ show, handleClose, data, title }) => {
     )
 }
 
-export default ShowNoExistentData
+export default ShowExistNoChanges

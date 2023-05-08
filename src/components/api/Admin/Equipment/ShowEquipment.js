@@ -21,30 +21,32 @@ const ShowEquipment = ({ equipments, handleUpdateEquipment }) => {
         <>
             <ShowInfoEquipment show={show} handleClose={handleClose} handleUpdateEquipment={handleUpdateEquipment} equipment={equipment} />
             <CDBContainer>
-                <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless>
-                    <CDBTableHeader>
-                        <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
-                            <th>Id</th>
-                            <th>Tipo</th>
-                            <th>Equipo</th>
-                            <th>Número</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                        </tr>
-                    </CDBTableHeader>
-                    <CDBTableBody>
-                        {equipments.map((equipment) => (
-                            <tr key={equipment.id} onClick={() => handleClick(equipment)} style={equipment.damaged ? { backgroundColor: 'rgba(255, 0, 0, 0.699)' } : {}}>
-                                <td style={{ textAlign: 'center' }}>{equipment.id}</td>
-                                <td style={{ textAlign: 'center' }}><BadgesEquipment equipment={equipment} /></td>
-                                <td>{equipment.equipment_name}</td>
-                                <td style={{ textAlign: 'center' }}>{equipment.equipment_number}</td>
-                                <td>{equipment.extension ? '-' : equipment.brand}</td>
-                                <td>{equipment.extension ? '-' : equipment.model}</td>
+                <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
+                    <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
+                        <CDBTableHeader>
+                            <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
+                                <th>Id</th>
+                                <th>Tipo</th>
+                                <th>Equipo</th>
+                                <th>Número</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
                             </tr>
-                        ))}
-                    </CDBTableBody>
-                </CDBTable>
+                        </CDBTableHeader>
+                        <CDBTableBody>
+                            {equipments.map((equipment) => (
+                                <tr key={equipment.id} onClick={() => handleClick(equipment)} style={equipment.damaged ? { backgroundColor: 'rgba(255, 0, 0, 0.699)' } : {}}>
+                                    <td style={{ textAlign: 'center' }}>{equipment.id}</td>
+                                    <td style={{ textAlign: 'center' }}><BadgesEquipment equipment={equipment} /></td>
+                                    <td>{equipment.equipment_name}</td>
+                                    <td style={{ textAlign: 'center' }}>{equipment.equipment_number}</td>
+                                    <td>{equipment.extension ? '-' : equipment.brand}</td>
+                                    <td>{equipment.extension ? '-' : equipment.model}</td>
+                                </tr>
+                            ))}
+                        </CDBTableBody>
+                    </CDBTable>
+                </div>
             </CDBContainer>
         </>
     )

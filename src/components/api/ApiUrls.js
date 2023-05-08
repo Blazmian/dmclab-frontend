@@ -20,5 +20,18 @@ export const ApiUrls = createContext({
     deleteEquipment: 'http://localhost:8000/equipment/delete/',
 
     // Career
+    addCareers: 'http://localhost:8000/career/create_many/',
     validateCareers: 'http://localhost:8000/career/validate/',
+
+    // Teacher
+    validateTeachers: 'http://localhost:8000/teacher/validate/',
+
+    // Students
+    validateStudents: 'http://localhost:8000/student/validate/',
+
+    // Subjects
+    validateSubjects: 'http://localhost:8000/subject/validate/',
+
+    // Enrolled
+    validateEnrolleds: 'http://localhost:8000/enrolled/validate/',
 })
