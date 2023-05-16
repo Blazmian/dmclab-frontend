@@ -48,7 +48,7 @@ const Semester = () => {
     return (
         <>
             <NavBarAdmin icon={'sync'} title={'Cambio de Semestre'} />
-            <div style={{ overflowY: 'auto', maxHeight: '89vh' }}>
+            <div style={{ overflowY: 'auto', maxHeight: '85vh' }}>
                 <Container className="mt-5">
                     <LoadExcelFile
                         onDrop={handleDrop}

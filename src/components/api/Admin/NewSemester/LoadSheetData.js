@@ -1,14 +1,19 @@
 import { CDBBox } from "cdbreact"
 import { useContext, useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom'
 import { Button, Container, Spinner } from "react-bootstrap"
 import { ApiUrls } from "../../ApiUrls"
 import axios from "axios"
 import DataVerified from "./DataVerified"
 import Swal from "sweetalert2"
+import ConfirmSubmit from "./ConfirmSubmit"
 
 const LoadSheetData = ({ sheetData, sheetNames }) => {
 
     const urls = useContext(ApiUrls)
+    const navigate = useNavigate()
+    const [noExistTotal, setNoExistTotal] = useState(0)
+    const [existTotal, setExistTotal] = useState(0)
     const [isVerifying, setIsVerifying] = useState(true)
     const [students, setStudents] = useState([])
     const [studentValidation, setStudentValidation] = useState(null)
@@ -53,6 +58,13 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
 
     const validateCareers = async () => {
         const res = await axios.post(urls.validateCareers, career)
+        if (res.data.noExist.length > 0) {
+            setNoExistTotal(prevTotal => prevTotal + res.data.noExist.length)
+        }
+
+        if (Object.keys(res.data.existWithChanges).length) {
+            setExistTotal(prevTotal => prevTotal + Object.keys(res.data.existWithChanges.new).length)
+        }
         setCareerValidation(res.data)
     }
 
@@ -83,6 +95,13 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
 
     const validateTeachers = async () => {
         const res = await axios.post(urls.validateTeachers, teachers)
+        if (res.data.noExist.length > 0) {
+            setNoExistTotal(prevTotal => prevTotal + res.data.noExist.length)
+        }
+
+        if (Object.keys(res.data.existWithChanges).length) {
+            setExistTotal(prevTotal => prevTotal + Object.keys(res.data.existWithChanges.new).length)
+        }
         setTeacherValidation(res.data)
     }
 
@@ -130,6 +149,13 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
 
     const validateStudents = async () => {
         const res = await axios.post(urls.validateStudents, students)
+        if (res.data.noExist.length > 0) {
+            setNoExistTotal(prevTotal => prevTotal + res.data.noExist.length)
+        }
+
+        if (Object.keys(res.data.existWithChanges).length) {
+            setExistTotal(prevTotal => prevTotal + Object.keys(res.data.existWithChanges.new).length)
+        }
         setStudentValidation(res.data)
     }
 
@@ -154,7 +180,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                         newObject.second_last_name = student[key]
                         break;
 
-                    case "semetre":
+                    case "semestre":
                         newObject.semester = student[key]
                         break;
 
@@ -195,6 +221,13 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
 
     const validateSubjects = async () => {
         const res = await axios.post(urls.validateSubjects, subjects)
+        if (res.data.noExist.length > 0) {
+            setNoExistTotal(prevTotal => prevTotal + res.data.noExist.length)
+        }
+
+        if (Object.keys(res.data.existWithChanges).length) {
+            setExistTotal(prevTotal => prevTotal + Object.keys(res.data.existWithChanges.new).length)
+        }
         setSubjectValidation(res.data)
     }
 
@@ -233,6 +266,13 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
 
     const validateEnrolleds = async () => {
         const res = await axios.post(urls.validateEnrolleds, enrolled)
+        if (res.data.noExist.length > 0) {
+            setNoExistTotal(prevTotal => prevTotal + res.data.noExist.length)
+        }
+
+        if (Object.keys(res.data.existWithChanges).length) {
+            setExistTotal(prevTotal => prevTotal + Object.keys(res.data.existWithChanges.new).length)
+        }
         setEnrolledValidation(res.data)
     }
 
@@ -259,41 +299,180 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         setEnrolled(newEnrolled)
     }
 
-    const confirmSubmitNewSemester = () => {
-        const totalNoExistentData = (careerValidation.noExist.length +
-            teacherValidation.noExist.length + studentValidation.noExist.length +
-            subjectValidation.noExist.length + enrolledValidation.noExist.length)
-        Swal.fire({
-            title: '¿Deseas insertas los nuevos datos del semestre?',
-            text: 'Se insertarán ' + totalNoExistentData + ' datos',
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonText: 'Subir Datos',
-            cancelButtonText: 'Cancelar',
-            reverseButtons: true
-        }).then((response) => {
-            if (response.isConfirmed) {
-                handleSubmitNewSemester()
-            }
-        })
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true)
+    }
+    const handleClose = () => {
+        setShow(false)
     }
 
-    const handleSubmitNewSemester = () => {
-        console.log(careerValidation.noExist)
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const handleSubmitNewSemester = async () => {
+        setIsSubmitting(true)
+        const errors = []
+
         if (careerValidation) {
-            submitCareer()
+            const career = await submitCareer()
+            if (career) {
+
+            } else {
+                errors.push('Carreras')
+            }
+        }
+
+        await delay(1000)
+        if (teacherValidation) {
+            const teacher = await submitTeacher()
+            if (teacher) {
+
+            } else {
+                errors.push('Maestros')
+            }
+        }
+
+        await delay(1000)
+        if (studentValidation) {
+            const student = await submitStudent()
+            if (student) {
+
+            } else {
+                errors.push('Alumnos')
+            }
+        }
+
+        await delay(1000)
+        if (subjectValidation) {
+            const subject = await submitSubject()
+            if (subject) {
+
+            } else {
+                errors.push('Materias')
+            }
+        }
+
+        await delay(1000)
+        if (enrolledValidation) {
+            const enrolled = await submitEnrolled()
+            if (enrolled) {
+
+            } else {
+                errors.push('Inscritos')
+            }
+        }
+
+        if (errors.length === 0) {
+            handleClose()
+            Swal.fire({
+                title: 'Movimiento exitoso',
+                text: "Datos actualizados correctamente",
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then((response) => {
+                navigate('/admin/reportes')
+            })
         }
     }
 
     const submitCareer = async () => {
-        const res = await axios.post(urls.addCareers, careerValidation.noExist)
-        console.log(res.data)
+        const data = []
+        if (careerValidation.noExist.length > 0) {
+            for (let index = 0; index < careerValidation.noExist.length; index++) {
+                data.push(careerValidation.noExist[index])
+            }
+        }
+
+        if (careerValidation.existWithChanges.new.length > 0) {
+            for (let index = 0; index < Object.keys(careerValidation.existWithChanges.new).length; index++) {
+                data.push(careerValidation.existWithChanges.new[index])
+            }
+        }
+
+        const res = await axios.post(urls.addCareers, data)
+        return res.data
     }
 
+    const submitTeacher = async () => {
+        const data = []
+        if (teacherValidation.noExist.length > 0) {
+            for (let index = 0; index < teacherValidation.noExist.length; index++) {
+                data.push(teacherValidation.noExist[index])
+            }
+        }
 
+        if (teacherValidation.existWithChanges.new.length > 0) {
+            for (let index = 0; index < Object.keys(teacherValidation.existWithChanges.new).length; index++) {
+                data.push(teacherValidation.existWithChanges.new[index])
+            }
+        }
+
+
+        const res = await axios.post(urls.addTeachers, data)
+        return res.data
+    }
+
+    const submitStudent = async () => {
+        const data = []
+        if (studentValidation.noExist.length > 0) {
+            for (let index = 0; index < studentValidation.noExist.length; index++) {
+                data.push(studentValidation.noExist[index])
+            }
+        }
+
+        if (studentValidation.existWithChanges.new.length > 0) {
+            for (let index = 0; index < Object.keys(studentValidation.existWithChanges.new).length; index++) {
+                data.push(studentValidation.existWithChanges.new[index])
+            }
+        }
+
+
+        const res = await axios.post(urls.addStudents, data)
+        return res.data
+    }
+
+    const submitSubject = async () => {
+        const data = []
+        if (subjectValidation.noExist.length > 0) {
+            for (let index = 0; index < subjectValidation.noExist.length; index++) {
+                data.push(subjectValidation.noExist[index])
+            }
+        }
+
+        if (subjectValidation.existWithChanges.new.length > 0) {
+            for (let index = 0; index < Object.keys(subjectValidation.existWithChanges.new).length; index++) {
+                data.push(subjectValidation.existWithChanges.new[index])
+            }
+        }
+
+
+        const res = await axios.post(urls.addSubjects, data)
+        return res.data
+    }
+
+    const submitEnrolled = async () => {
+        const data = []
+        if (enrolledValidation.noExist.length > 0) {
+            for (let index = 0; index < enrolledValidation.noExist.length; index++) {
+                data.push(enrolledValidation.noExist[index])
+            }
+        }
+
+        if (enrolledValidation.existWithChanges.new.length > 0) {
+            for (let index = 0; index < Object.keys(enrolledValidation.existWithChanges.new).length; index++) {
+                data.push(enrolledValidation.existWithChanges.new[index])
+            }
+        }
+
+
+        const res = await axios.post(urls.addEnrolleds, data)
+        return res.data
+    }
 
     return (
         <>
+            <ConfirmSubmit show={show} handleClose={handleClose} exist={existTotal} noExist={noExistTotal} submitMethod={handleSubmitNewSemester} isSubmitting={isSubmitting} />
             <Container className="mt-5">
                 {isVerifying ? (
                     <CDBBox display="flex" flex="fill">
@@ -305,7 +484,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                         <CDBBox display="flex" flex="fill" alignItems="center">
                             <h3 className="mb-0">Datos Recibidos</h3>
                             <CDBBox display="flex" flex="fill" justifyContent="end">
-                                <Button variant="success" size="lg" onClick={confirmSubmitNewSemester}>Subir Contenido</Button>
+                                <Button variant="success" size="lg" onClick={handleShow}>Subir Contenido</Button>
                             </CDBBox>
                         </CDBBox>
                         {studentValidation ? (<DataVerified data={students} dataVerified={studentValidation} title={'Alumnos'} />) : (<></>)}
