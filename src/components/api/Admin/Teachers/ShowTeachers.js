@@ -1,45 +1,49 @@
 import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useState } from "react"
-import BadgesUsers from "./BadgesUsers"
-import ShowInfoUser from "./ShowInfoUser"
+import Teachers from "./TeachersInterface"
 
-const ShowUsers = ({ users, setUsers, handleUpdateUsers }) => {
+const ShowTeachers = ({teachers, setTeachers, handleUpdateTeachers }) => {
 
-    const [user, setUser] = useState([])
+
+    const [teacher, setTeacher] = useState([])
 
     // For modal component
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleClick = (user) => {
-        setUser(user)
+    const handleClick = (teacher) => {
+        setTeacher(teacher)
         handleShow()
     }
-console.log(users)
+    if (!Array.isArray(teacher)) {
+        return <div>No hay usuarios disponibles</div>;
+    }
+    console.log(teachers);
+    /*<ShowInfoStudent show={show} handleClose={handleClose} handleUpdateTeachers={handleUpdateTeachers} teacher={teacher} />
+     */
     return (
         <>
-            <ShowInfoUser show={show} handleClose={handleClose} handleUpdateUsers={handleUpdateUsers} user={user} />
             <CDBContainer>
                 <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
                     <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
                         <CDBTableHeader>
                             <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
-                                <th>Id</th>
-                                <th>Usuario</th>
+                                <th>No.Control</th>
                                 <th>Nombres</th>
                                 <th>Primer Apellido</th>
                                 <th>Segundo Apellido</th>
+                                <th>RFC</th>
                             </tr>
                         </CDBTableHeader>
                         <CDBTableBody>
-                            {users.map((user) => (
-                                <tr key={user.id} onClick={() => handleClick(user)}>
-                                    <td style={{ textAlign: 'center' }}>{user.id}</td>
-                                    <td style={{ textAlign: 'center' }}><BadgesUsers user={user} /></td>
-                                    <td>{user.name}</td>
-                                    <td>{user.first_last_name}</td>
-                                    <td>{user.second_last_name}</td>
+                            {teachers.map((teacher) => (
+                                <tr key={teacher.control_number} style={{ textAlign: 'center' }}>
+                                    <td >{teacher.control_number}</td>
+                                    <td>{teacher.name}</td>
+                                    <td>{teacher.first_last_name}</td>
+                                    <td>{teacher.second_last_name}</td>
+                                    <td>{teacher.rfc}</td>
                                 </tr>
                             ))}
                         </CDBTableBody>
@@ -50,4 +54,4 @@ console.log(users)
     )
 }
 
-export default ShowUsers
+export default ShowTeachers

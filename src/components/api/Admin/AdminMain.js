@@ -5,10 +5,12 @@ import AdminSideBar from "./AdminSideBar"
 import Equipment from "./Equipment/EquipmentInterface"
 import Users from "./Users/UsersInterface"
 import Auth from "../../../config/Auth"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import axios from "axios"
 import AdminConfiguration from "./Configuration/ConfigurationInterface"
 import Semester from "./NewSemester/NewSemesterInterface"
+import Students from "./Students/StudentsInterface"
+import Teachers from "./Teachers/TeachersInterface"
 
 const AdminMain = () => {
 
@@ -35,6 +37,8 @@ const AdminMain = () => {
                             <Route path="/usuarios/*" element={<Users user={user} />} />
                             <Route path="/equipo/*" element={<Equipment />} />
                             <Route path="/caseteros/*" />
+                            <Route path="/alumnos/*" element={<Students />} />
+                            <Route path="/docentes/*" element={<Teachers />} />
                             <Route path="/cambio-semestre" element={<Semester />} />
                             <Route path="/configuracion" element={<AdminConfiguration user={user} />} />
                         </Routes>

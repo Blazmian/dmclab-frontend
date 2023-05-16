@@ -3,28 +3,31 @@ import { CDBBox, CDBBtn, CDBContainer, CDBIcon, CDBInput } from "cdbreact";
 import React, { useContext, useEffect, useState } from "react";
 import { Collapse } from "react-bootstrap";
 import NavBarAdmin from "../NavBarAdmin";
-import ShowUsers from "./ShowUsers";
-import CreateUser from "./CreateUser";
+import ShowStudents from  "./ShowStudents";
+/*import CreateUser from "./CreateUser";*/
 import { ApiUrls } from "../../ApiUrls";
+import CreateStudent from "./CreateStudent";
 
-const Users = ({ user }) => {
+const Students = ({ student }) => {
 
     const urls = useContext(ApiUrls)
 
     // Data of users table
-    const [users, setUsers] = useState([])
+    const [students, setStudents] = useState([])
 
     useEffect(() => {
-        getUsers()
-    }, [user])
+        getStudents()
+    }, [student])
 
-    async function getUsers() {
-        if (user) {
-            const res = await axios.get(urls.staff + user.staff.id)
-            console.log(res.data)
-            setUsers(res.data)
+    async function getStudents() {
+        try {
+          const res = await axios.get(urls.students)
+          console.log(res.data)
+          setStudents(res.data)
+        } catch (error) {
+          console.error('Error:', error)
         }
-    }
+      }
 
     // For collapse component
     const [open, setOpen] = useState(false)
@@ -38,24 +41,26 @@ const Users = ({ user }) => {
         setShow(false)
     }
 
-    const handleUpdateUsers = () => {
-        getUsers()
+    const handleUpdateStudents = () => {
+        getStudents()
     }
-
-    return (
-        <>
-            <NavBarAdmin icon={'users'} title={'Usuarios'} />
-            <CreateUser show={show} handleClose={handleClose} handleAddUser={handleUpdateUsers} />
-            <CDBContainer className="mt-5 mb-3">
-                <CDBBox display="flex">
-                    <CDBBox display="flex" justifyContent="start">
+/*<CDBBox display="flex" justifyContent="start">
                         <CDBBtn style={{ borderRadius: '12px' }} onClick={handleShow}>
                             <CDBIcon icon="user-plus" className="me-2" />
-                            Agregar usuario
+                            Agregar alumno
                         </CDBBtn>
-                    </CDBBox>
+                    </CDBBox>**/
+    return (
+
+
+        <>
+            <NavBarAdmin icon={'user-graduate'} title={'Alumnos'} />
+            <CreateStudent show={show} handleClose={handleClose} handleAddStudent={handleUpdateStudents} />
+            <CDBContainer className="mt-5 mb-3">
+                <CDBBox display="flex">
+                    
                     <CDBBox display="flex" flex="fill" justifyContent="end">
-                        <CDBInput style={{ borderRadius: '12px' }} placeholder="Buscar usuarios" className="mx-3 w-50" icon={<i className="fa fa-search text-dark"></i>} />
+                        <CDBInput style={{ borderRadius: '12px' }} placeholder="Buscar alumnos" className="mx-3 w-50" icon={<i className="fa fa-search text-dark"></i>} />
                         <CDBBtn style={{ borderRadius: '12px' }} color="dark" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open} >
                             <CDBIcon icon="filter" className="me-2" />
                             Filtrar
@@ -76,9 +81,9 @@ const Users = ({ user }) => {
                     </CDBContainer>
                 </Collapse>
             </CDBContainer>
-            <ShowUsers users={users} setUsers={setUsers} handleUpdateUsers={handleUpdateUsers} />
+            <ShowStudents students={students} setStudents={setStudents} handleUpdateStudents={handleUpdateStudents} />
         </>
     )
 }
 
-export default Users
+export default Students

@@ -1,0 +1,64 @@
+import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
+import { useState } from "react"
+import Students from "./StudentsInterface";
+
+const ShowStudents = ({students, setStudents, handleUpdateStudents }) => {
+
+
+    const [student, setStudent] = useState([])
+
+    // For modal component
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const handleClick = (student) => {
+        setStudent(student)
+        handleShow()
+    }
+    if (!Array.isArray(student)) {
+        return <div>No hay usuarios disponibles</div>;
+    }
+    /*<ShowInfoStudent show={show} handleClose={handleClose} handleUpdateStudents={handleUpdateStudents} student={student} />
+     */
+    return (
+        <>
+            <CDBContainer>
+                <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
+                    <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
+                        <CDBTableHeader>
+                            <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
+                                <th>No.Control</th>
+                                <th>Nombres</th>
+                                <th>Primer Apellido</th>
+                                <th>Segundo Apellido</th>
+                                <th>Carrera</th>
+                                <th>Semestre</th>
+                            </tr>
+                        </CDBTableHeader>
+                        <CDBTableBody>
+                            {students.map((student) => (
+                                <tr key={student.control_number}style={{ textAlign: 'center' }}>
+                                    <td >{student.control_number}</td>
+                                    <td>{student.name}</td>
+                                    <td>{student.first_last_name}</td>
+                                    <td>{student.second_last_name}</td>
+                                    <td>{student.career.career}</td>
+                                    <td>{student.semester}</td>
+                                </tr>
+                            ))}
+                        </CDBTableBody>
+                    </CDBTable>
+                </div>
+            </CDBContainer>
+        </>
+    )
+}
+
+export default ShowStudents
+
+/**<td style={{ textAlign: 'center' }}>{student.control_number}</td>
+                                    <td>{student.name}</td>
+                                    <td>{student.first_last_name}</td>
+                                    <td>{student.second_last_name}</td>
+                                    <td>{student.semester}</td>*/
