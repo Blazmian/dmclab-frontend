@@ -3,11 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminMain from './components/api/Admin/AdminMain';
+import RequestMain from './components/api/Requests/RequestMain';
 import { ToastContainer } from 'react-toastify';
 import Register from './components/api/Admin/Users/Register';
 import LoginStudents from './components/LoginStudents';
 import Login from './components/LoginUser';
 import ReceptionistMain from './components/api/Receptionist/ReceptionistMain';
+
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
           <Route path='/admin/*' element={<AdminMain />} />
           <Route path='/casetero/*' element={<ReceptionistMain />} />
           <Route path='/' element={<LoginStudents />} />
+          <Route path='/solicitar-equipo/' element={<RequestMain />} />
           <Route exact path="/register/:type/:id" element={<Register />} />
         </Routes>
       </BrowserRouter>

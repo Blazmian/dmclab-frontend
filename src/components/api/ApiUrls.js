@@ -26,10 +26,13 @@ export const ApiUrls = createContext({
     // Teacher
     addTeachers: 'http://localhost:8000/teacher/create_many/',
     validateTeachers: 'http://localhost:8000/teacher/validate/',
+    teachers: 'http://localhost:8000/teachers/all/',
 
     // Students
     addStudents: 'http://localhost:8000/student/create_many/',
     validateStudents: 'http://localhost:8000/student/validate/',
+    students: 'http://localhost:8000/student/all/',
+    addStudent: 'http://localhost:8000/student/',
 
     // Subjects
     addSubjects: 'http://localhost:8000/subject/create_many/',
@@ -38,4 +41,7 @@ export const ApiUrls = createContext({
     // Enrolled
     addEnrolleds: 'http://localhost:8000/enrolled/create_many/',
     validateEnrolleds: 'http://localhost:8000/enrolled/validate/',
+
+    //Requests
+    equipmentRequests: 'http://localhost:8000/solicitar-equipo/'
 })
