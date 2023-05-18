@@ -1,4 +1,4 @@
-import { CDBBox, CDBSpinner } from "cdbreact"
+import { CDBBox } from "cdbreact"
 import { Button, Container, Modal, Spinner } from "react-bootstrap"
 import Warning from '../../../../img/warning.png'
 
@@ -6,6 +6,7 @@ const ConfirmSubmit = ({ show, handleClose, noExist, exist, submitMethod, isSubm
 
     return (
         <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+
             <Modal.Header closeButton>
                 <Modal.Title>{isSubmitting ? 'Subiendo datos...' : 'Estás a punto de subir datos...'}</Modal.Title>
             </Modal.Header>

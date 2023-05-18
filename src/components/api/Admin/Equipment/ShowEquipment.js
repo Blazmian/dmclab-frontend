@@ -35,7 +35,12 @@ const ShowEquipment = ({ equipments, handleUpdateEquipment }) => {
                         </CDBTableHeader>
                         <CDBTableBody>
                             {equipments.map((equipment) => (
-                                <tr key={equipment.id} onClick={() => handleClick(equipment)} style={equipment.damaged ? { backgroundColor: 'rgba(255, 0, 0, 0.699)' } : {}}>
+                                <tr
+                                    key={equipment.id}
+                                    onClick={() => handleClick(equipment)}
+                                    style={
+                                        equipment.damaged ? { backgroundColor: 'rgba(255, 0, 0, 0.699)' } : equipment.borrowed ? { backgroundColor: 'rgba(247, 247, 12, 0.5)' } : {}
+                                    }>
                                     <td style={{ textAlign: 'center' }}>{equipment.id}</td>
                                     <td style={{ textAlign: 'center' }}><BadgesEquipment equipment={equipment} /></td>
                                     <td>{equipment.equipment_name}</td>

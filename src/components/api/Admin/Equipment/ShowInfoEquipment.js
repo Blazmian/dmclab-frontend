@@ -121,9 +121,9 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
                             <CDBBox display="flex" alignItems="center">
                                 <div
                                     className="me-2"
-                                    style={{ width: '20px', height: '20px', borderRadius: '60px', ... (equipment.damaged ? { backgroundColor: 'red' } : { backgroundColor: 'rgb(32, 167, 32)' }) }}
+                                    style={{ width: '20px', height: '20px', borderRadius: '60px', ... (equipment.damaged ? { backgroundColor: 'red' } : equipment.borrowed ? { backgroundColor: 'rgb(247, 224, 12)' } : { backgroundColor: 'rgb(32, 167, 32)' }) }}
                                 />
-                                {equipment.damaged ? 'Se encuentra dañado' : 'En buen estado'}
+                                {equipment.damaged ? 'Se encuentra dañado' : equipment.borrowed ? 'Se encuentra prestado' : 'En buen estado'}
                             </CDBBox>
                         </CDBBox>
                     </CDBBox>
@@ -158,7 +158,7 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
                             {equipment.damaged ?
                                 <Button variant="success" className="mt-3" onClick={() => confirmChangeDamaged()}>Activar Equipo</Button>
                                 :
-                                <Button variant="warning" className="mt-3" onClick={() => confirmChangeDamaged()}>Reportar Equipo Dañado</Button>
+                                <Button variant="warning" className="mt-3" disabled={equipment.borrowed ? true : false} onClick={() => confirmChangeDamaged()}>Reportar Equipo Dañado</Button>
                             }
                         </CDBBox>
                     </CDBBox>
