@@ -26,7 +26,7 @@ export const ApiUrls = createContext({
     // Teacher
     addTeachers: 'http://localhost:8000/teacher/create_many/',
     validateTeachers: 'http://localhost:8000/teacher/validate/',
-    teachers: 'http://localhost:8000/teachers/all/',
+    teachers: 'http://localhost:8000/teacher/all/',
 
     // Students
     addStudents: 'http://localhost:8000/student/create_many/',

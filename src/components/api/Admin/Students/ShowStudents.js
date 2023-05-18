@@ -2,7 +2,7 @@ import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useState } from "react"
 import Students from "./StudentsInterface";
 
-const ShowStudents = ({students, setStudents, handleUpdateStudents }) => {
+const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
 
 
     const [student, setStudent] = useState([])
@@ -19,8 +19,7 @@ const ShowStudents = ({students, setStudents, handleUpdateStudents }) => {
     if (!Array.isArray(student)) {
         return <div>No hay usuarios disponibles</div>;
     }
-    /*<ShowInfoStudent show={show} handleClose={handleClose} handleUpdateStudents={handleUpdateStudents} student={student} />
-     */
+
     return (
         <>
             <CDBContainer>
@@ -38,8 +37,8 @@ const ShowStudents = ({students, setStudents, handleUpdateStudents }) => {
                         </CDBTableHeader>
                         <CDBTableBody>
                             {students.map((student) => (
-                                <tr key={student.control_number}style={{ textAlign: 'center' }}>
-                                    <td >{student.control_number}</td>
+                                <tr key={student.control_number} style={{ textAlign: 'center' }}>
+                                    <td>{student.control_number}</td>
                                     <td>{student.name}</td>
                                     <td>{student.first_last_name}</td>
                                     <td>{student.second_last_name}</td>
@@ -56,9 +55,3 @@ const ShowStudents = ({students, setStudents, handleUpdateStudents }) => {
 }
 
 export default ShowStudents
-
-/**<td style={{ textAlign: 'center' }}>{student.control_number}</td>
-                                    <td>{student.name}</td>
-                                    <td>{student.first_last_name}</td>
-                                    <td>{student.second_last_name}</td>
-                                    <td>{student.semester}</td>*/

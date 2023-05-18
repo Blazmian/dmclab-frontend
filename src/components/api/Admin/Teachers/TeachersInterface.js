@@ -22,7 +22,6 @@ const Teachers = ({ student }) => {
     async function getTeachers() {
         try {
           const res = await axios.get(urls.teachers)
-          console.log(res.data)
           setTeachers(res.data)
         } catch (error) {
           console.error('Error:', error)

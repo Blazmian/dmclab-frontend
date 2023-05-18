@@ -408,7 +408,6 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
             }
         }
 
-
         const res = await axios.post(urls.addTeachers, data)
         return res.data
     }
@@ -427,7 +426,6 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
             }
         }
 
-
         const res = await axios.post(urls.addStudents, data)
         return res.data
     }
@@ -445,7 +443,6 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                 data.push(subjectValidation.existWithChanges.new[index])
             }
         }
-
 
         const res = await axios.post(urls.addSubjects, data)
         return res.data
