@@ -31,6 +31,7 @@ export const ApiUrls = createContext({
     validateStudents: 'http://localhost:8000/student/validate/',
     students: 'http://localhost:8000/student/all/',
     addStudent: 'http://localhost:8000/student/',
+    loginStudent: 'http://localhost:8000/loginStudent/',
 
     // Subjects
     validateSubjects: 'http://localhost:8000/subject/validate/',
