@@ -7,7 +7,6 @@ const ShowUsers = ({ users, setUsers, handleUpdateUsers }) => {
 
     const [user, setUser] = useState([])
 
-    // For modal component
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

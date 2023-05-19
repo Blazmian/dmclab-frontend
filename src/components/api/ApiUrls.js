@@ -33,6 +33,7 @@ export const ApiUrls = createContext({
     validateStudents: 'http://localhost:8000/student/validate/',
     students: 'http://localhost:8000/student/all/',
     addStudent: 'http://localhost:8000/student/',
+    loginStudent: 'http://localhost:8000/loginStudent/',
 
     // Subjects
     addSubjects: 'http://localhost:8000/subject/create_many/',
