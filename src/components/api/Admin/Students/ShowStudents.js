@@ -16,9 +16,6 @@ const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
         setStudent(student)
         handleShow()
     }
-    if (!Array.isArray(student)) {
-        return <div>No hay usuarios disponibles</div>;
-    }
 
     return (
         <>

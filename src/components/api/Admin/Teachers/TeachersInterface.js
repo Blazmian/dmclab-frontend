@@ -3,12 +3,11 @@ import { CDBBox, CDBBtn, CDBContainer, CDBIcon, CDBInput } from "cdbreact";
 import React, { useContext, useEffect, useState } from "react";
 import { Collapse } from "react-bootstrap";
 import NavBarAdmin from "../NavBarAdmin";
-import ShowStudents from  "./ShowTeachers";
-/*import CreateUser from "./CreateUser";*/
+import ShowStudents from "./ShowTeachers";
 import { ApiUrls } from "../../ApiUrls";
 
 
-const Teachers = ({ student }) => {
+const Teachers = () => {
 
     const urls = useContext(ApiUrls)
 
@@ -17,16 +16,16 @@ const Teachers = ({ student }) => {
 
     useEffect(() => {
         getTeachers()
-    }, [student])
+    }, [])
 
     async function getTeachers() {
         try {
-          const res = await axios.get(urls.teachers)
-          setTeachers(res.data)
+            const res = await axios.get(urls.teachers)
+            setTeachers(res.data)
         } catch (error) {
-          console.error('Error:', error)
+            console.error('Error:', error)
         }
-      }
+    }
 
     // For collapse component
     const [open, setOpen] = useState(false)
