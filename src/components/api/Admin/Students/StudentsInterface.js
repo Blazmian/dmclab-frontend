@@ -3,12 +3,11 @@ import { CDBBox, CDBBtn, CDBContainer, CDBIcon, CDBInput } from "cdbreact";
 import React, { useContext, useEffect, useState } from "react";
 import { Collapse } from "react-bootstrap";
 import NavBarAdmin from "../NavBarAdmin";
-import ShowStudents from  "./ShowStudents";
-/*import CreateUser from "./CreateUser";*/
+import ShowStudents from "./ShowStudents";
 import { ApiUrls } from "../../ApiUrls";
 import CreateStudent from "./CreateStudent";
 
-const Students = ({ student }) => {
+const Students = () => {
 
     const urls = useContext(ApiUrls)
 
@@ -17,17 +16,16 @@ const Students = ({ student }) => {
 
     useEffect(() => {
         getStudents()
-    }, [student])
+    }, [])
 
     async function getStudents() {
         try {
-          const res = await axios.get(urls.students)
-          console.log(res.data)
-          setStudents(res.data)
+            const res = await axios.get(urls.students)
+            setStudents(res.data)
         } catch (error) {
-          console.error('Error:', error)
+            console.error('Error:', error)
         }
-      }
+    }
 
     // For collapse component
     const [open, setOpen] = useState(false)
@@ -44,21 +42,14 @@ const Students = ({ student }) => {
     const handleUpdateStudents = () => {
         getStudents()
     }
-/*<CDBBox display="flex" justifyContent="start">
-                        <CDBBtn style={{ borderRadius: '12px' }} onClick={handleShow}>
-                            <CDBIcon icon="user-plus" className="me-2" />
-                            Agregar alumno
-                        </CDBBtn>
-                    </CDBBox>**/
+
     return (
-
-
         <>
             <NavBarAdmin icon={'user-graduate'} title={'Alumnos'} />
             <CreateStudent show={show} handleClose={handleClose} handleAddStudent={handleUpdateStudents} />
             <CDBContainer className="mt-5 mb-3">
                 <CDBBox display="flex">
-                    
+
                     <CDBBox display="flex" flex="fill" justifyContent="end">
                         <CDBInput style={{ borderRadius: '12px' }} placeholder="Buscar alumnos" className="mx-3 w-50" icon={<i className="fa fa-search text-dark"></i>} />
                         <CDBBtn style={{ borderRadius: '12px' }} color="dark" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open} >

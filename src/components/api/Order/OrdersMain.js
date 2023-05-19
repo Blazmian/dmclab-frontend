@@ -91,6 +91,7 @@ const OrdersMain = () => {
                             <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
                                 <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Carrera</h6>
                                 <p className="m-0">{student && student.career && student.career.career}</p>
+                                <p className="m-0">Carrera</p>
                             </CDBBox>
 
                             <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
@@ -179,7 +180,6 @@ const OrdersMain = () => {
                                     <Col><Form.Label>Cantidad</Form.Label></Col>
                                     <hr />
                                 </Row>
-                               
                                 <Row>
                                     
                                     <Col> {equipmentList.map((equipment, index) => (
@@ -202,7 +202,6 @@ const OrdersMain = () => {
                                     ))}</Col>
                                 </Row>
                                 <Row className="d-flexx mb-2">
-                                    
                                 </Row>
                             </Container>
                             <Container className="mt-5">
@@ -221,16 +220,3 @@ const OrdersMain = () => {
     )
 }
 export default OrdersMain
-
-
-/*
-<Form.Select className="me-3">
-                                  {equipmentOptions.length > 0 && (
-                                      <React.Fragment>
-                                          <option value="">Seleccione una opción</option>
-                                          {equipmentOptions.map((option, index) => (
-                                              <option key={index}>{option}</option>
-                                          ))}
-                                      </React.Fragment>
-                                  )}
-                              </Form.Select>*/

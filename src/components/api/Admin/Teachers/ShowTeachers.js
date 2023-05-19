@@ -1,9 +1,7 @@
 import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useState } from "react"
-import Teachers from "./TeachersInterface"
 
-const ShowTeachers = ({teachers, setTeachers, handleUpdateTeachers }) => {
-
+const ShowTeachers = ({ teachers, setTeachers, handleUpdateTeachers }) => {
 
     const [teacher, setTeacher] = useState([])
 
@@ -16,12 +14,7 @@ const ShowTeachers = ({teachers, setTeachers, handleUpdateTeachers }) => {
         setTeacher(teacher)
         handleShow()
     }
-    if (!Array.isArray(teacher)) {
-        return <div>No hay usuarios disponibles</div>;
-    }
-    console.log(teachers);
-    /*<ShowInfoStudent show={show} handleClose={handleClose} handleUpdateTeachers={handleUpdateTeachers} teacher={teacher} />
-     */
+
     return (
         <>
             <CDBContainer>
