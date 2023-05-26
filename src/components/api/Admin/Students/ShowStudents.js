@@ -1,6 +1,5 @@
 import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useState } from "react"
-import Students from "./StudentsInterface";
 
 const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
 
