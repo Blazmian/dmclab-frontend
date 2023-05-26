@@ -470,6 +470,14 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
     return (
         <>
             <ConfirmSubmit show={show} handleClose={handleClose} exist={existTotal} noExist={noExistTotal} submitMethod={handleSubmitNewSemester} isSubmitting={isSubmitting} />
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
             <Container className="mt-5">
                 {isVerifying ? (
                     <CDBBox display="flex" flex="fill">

@@ -49,6 +49,14 @@ const Semester = () => {
         <>
             <NavBarAdmin icon={'sync'} title={'Cambio de Semestre'} />
             <div style={{ overflowY: 'auto', maxHeight: '85vh' }}>
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
                 <Container className="mt-5">
                     <LoadExcelFile
                         onDrop={handleDrop}

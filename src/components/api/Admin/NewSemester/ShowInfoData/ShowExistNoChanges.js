@@ -16,6 +16,14 @@ const ShowExistNoChanges = ({ show, handleClose, data, title }) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered size="xl">
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
                 <Modal.Header closeButton>
                     <Modal.Title>{title} existentes pero sin cambios</Modal.Title>
                 </Modal.Header>

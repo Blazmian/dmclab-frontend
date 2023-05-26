@@ -8,6 +8,14 @@ const LoadExcelFile = ({ onDrop, isDraging, handleDragEnter, handleDragExit, isL
 
     return (
         <>
+        <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
             <Container style={{ padding: '20px', textAlign: 'center', width: '50%', ...(isDraging ? { border: '2px solid gray', backgroundColor: '#e2e8f4' } : { border: '2px dashed gray', }) }}>
                 <Dropzone onDrop={onDrop} maxFiles={1} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onDragEnter={handleDragEnter} onDragLeave={handleDragExit}>
                     {({ getRootProps, getInputProps }) => (

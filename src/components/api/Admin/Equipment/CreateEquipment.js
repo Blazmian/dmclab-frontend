@@ -165,6 +165,14 @@ const CreateEquipment = ({ show, handleClose, handleUpdateEquipment }) => {
             <Modal.Header closeButton>
                 <Modal.Title>Agregar Equipos</Modal.Title>
             </Modal.Header>
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments)}
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-EV6GHP7VHP');
+                </script></div>
             <Modal.Body>
                 <Form>
                     <Container fluid>

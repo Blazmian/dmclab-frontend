@@ -9,7 +9,14 @@ const ConfirmSubmit = ({ show, handleClose, noExist, exist, submitMethod, isSubm
 
             <Modal.Header closeButton>
                 <Modal.Title>{isSubmitting ? 'Subiendo datos...' : 'Estás a punto de subir datos...'}</Modal.Title>
-            </Modal.Header>
+            </Modal.Header><div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
             <Modal.Body>
                 <Container>
                     <CDBBox display="flex" flex="fill" justifyContent="center" my={2}>
