@@ -108,6 +108,24 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
             <Modal.Header closeButton>
                 <Modal.Title><BadgesEquipment equipment={equipment} />{' ' + equipment.equipment_name}</Modal.Title>
             </Modal.Header>
+<<<<<<< Updated upstream
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+=======
+            <div>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+>>>>>>> Stashed changes
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+<<<<<<< Updated upstream
+</script></div>
+=======
+</script>
+            </div>
+>>>>>>> Stashed changes
             <Modal.Body>
                 <CDBContainer fluid className="mb-4">
                     <CDBBox display="flex" flex="fill" justifyContent="start" alignItems="center">

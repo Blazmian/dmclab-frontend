@@ -470,6 +470,24 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
     return (
         <>
             <ConfirmSubmit show={show} handleClose={handleClose} exist={existTotal} noExist={noExistTotal} submitMethod={handleSubmitNewSemester} isSubmitting={isSubmitting} />
+<<<<<<< Updated upstream
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+=======
+            <div>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+>>>>>>> Stashed changes
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+<<<<<<< Updated upstream
+</script></div>
+=======
+</script>
+            </div>
+>>>>>>> Stashed changes
             <Container className="mt-5">
                 {isVerifying ? (
                     <CDBBox display="flex" flex="fill">

@@ -46,8 +46,37 @@ const Teachers = () => {
     return (
 
 
+<<<<<<< Updated upstream
         <>
+        <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
+=======
+        <><div>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date());
+
+gtag('config', 'G-EV6GHP7VHP');
+</script>
+        </div>
+>>>>>>> Stashed changes
             <NavBarAdmin icon={'user-graduate'} title={'Docentes'} />
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script></div>
             <CDBContainer className="mt-5 mb-3">
                 <CDBBox display="flex">
                     <CDBBox display="flex" flex="fill" justifyContent="end">

@@ -30,7 +30,25 @@ const DataVerified = ({ data, dataVerified, title }) => {
 
     return (
         <Card className="mx-5 my-4">
+<<<<<<< Updated upstream
             <Card.Header as="h4">{title}</Card.Header>
+            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+=======
+            <Card.Header as="h4">{title}</Card.Header><div>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+>>>>>>> Stashed changes
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+<<<<<<< Updated upstream
+</script></div>
+=======
+</script>
+            </div>
+>>>>>>> Stashed changes
             <Card.Body>
                 {dataVerified.noExist.length > 0 ? (
                     <>

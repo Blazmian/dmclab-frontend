@@ -58,6 +58,20 @@ const Orders = () => {
 
     return (
         <CDBBox display="flex" style={{ flex: 1 }} className="p-0">
+<<<<<<< Updated upstream
+            <div>
+=======
+             <div>
+>>>>>>> Stashed changes
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script>
+            </div>
             <Container className="mt-4">
                 <CDBBox display="flex" flex="fill" mb={3} mx={4} alignItems="center">
                     <h3 className="m-0">Pedidos<Badge bg="danger" pill className="ms-2">{loans.length}</Badge></h3>
