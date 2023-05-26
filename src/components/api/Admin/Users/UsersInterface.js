@@ -21,7 +21,6 @@ const Users = ({ user }) => {
     async function getUsers() {
         if (user) {
             const res = await axios.get(urls.staff + user.staff.id)
-            console.log(res.data)
             setUsers(res.data)
         }
     }

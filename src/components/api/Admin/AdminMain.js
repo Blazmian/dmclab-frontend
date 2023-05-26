@@ -5,16 +5,18 @@ import AdminSideBar from "./AdminSideBar"
 import Equipment from "./Equipment/EquipmentInterface"
 import Users from "./Users/UsersInterface"
 import Auth from "../../../config/Auth"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios"
 import AdminConfiguration from "./Configuration/ConfigurationInterface"
 import Semester from "./NewSemester/NewSemesterInterface"
 import Students from "./Students/StudentsInterface"
 import Teachers from "./Teachers/TeachersInterface"
+import { ApiUrls } from "../ApiUrls"
 
 const AdminMain = () => {
 
     const [user, setUser] = useState(null)
+    const urls = useContext(ApiUrls)
 
     useEffect(() => {
         getUserInfo()
@@ -22,7 +24,7 @@ const AdminMain = () => {
 
     const getUserInfo = async () => {
         const username = localStorage.getItem('user')
-        const res = await axios.get('http://localhost:8000/user/one/' + username)
+        const res = await axios.get(urls.obtainInfoUserLogged + username)
         setUser(res.data)
     }
 

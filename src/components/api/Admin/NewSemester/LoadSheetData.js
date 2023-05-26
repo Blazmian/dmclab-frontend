@@ -323,7 +323,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
             }
         }
 
-        await delay(1000)
+        await delay(3000)
         if (teacherValidation) {
             const teacher = await submitTeacher()
             if (teacher) {
@@ -333,7 +333,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
             }
         }
 
-        await delay(1000)
+        await delay(3000)
         if (studentValidation) {
             const student = await submitStudent()
             if (student) {
@@ -343,7 +343,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
             }
         }
 
-        await delay(1000)
+        await delay(3000)
         if (subjectValidation) {
             const subject = await submitSubject()
             if (subject) {
@@ -353,7 +353,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
             }
         }
 
-        await delay(1000)
+        await delay(3000)
         if (enrolledValidation) {
             const enrolled = await submitEnrolled()
             if (enrolled) {

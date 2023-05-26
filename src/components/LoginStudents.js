@@ -3,40 +3,42 @@ import axios from "axios"
 import { Form, FormGroup } from "react-bootstrap"
 import LogoITH from '../img/ITH.png'
 import MainNavBar from "./MainNavBar"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { ApiUrls } from "./api/ApiUrls"
 
 
 const LoginStudents = () => {
-    const [control_number, setControlNumber] = useState("");
-    const [pin, setPin] = useState("");
+    const [control_number, setControlNumber] = useState("")
+    const [pin, setPin] = useState("")
+    const urls = useContext(ApiUrls)
 
     const navigate = useNavigate()
 
     const handleInputUsername = (e) => {
-        setControlNumber(e.target.value);
-    };
+        setControlNumber(e.target.value)
+    }
 
     const handleInputPassword = (e) => {
-        setPin(e.target.value);
-    };
+        setPin(e.target.value)
+    }
 
     const login = async () => {
         if (control_number.length > 0 && pin.length > 0) {
-            const res = await axios.post("http://localhost:8000/student/login", {
+            const res = await axios.post(urls.loginStudent, {
                 control_number: Number(control_number),
                 pin: Number(pin),
             })
             if (res.data) {
-                navigate('/solicitar-equipo', { state: { student: res.data }});
+                navigate('/solicitar-equipo', { state: { student: res.data } })
             } else {
                 toast.error("Usuario no encontrado")
             }
         } else {
             toast.error("Debes introducir todos los datos")
         }
-    };
+    }
 
     return (
         <>

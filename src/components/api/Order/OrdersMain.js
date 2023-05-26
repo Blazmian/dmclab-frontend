@@ -1,222 +1,361 @@
-import { CDBBox } from "cdbreact"
+import { CDBBox, CDBIcon, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import axios from "axios"
-import { Container, FormGroup, Form, Row, Col, FormLabel, Button, Navbar } from "react-bootstrap"
+import { Container, FormGroup, Form, Row, Button, Navbar } from "react-bootstrap"
 import DMCLAB from '../../../img/light logo.png'
-import { useLocation } from "react-router-dom"
-import React, { useState, useEffect } from "react"
-
-
+import { useLocation, useNavigate } from "react-router-dom"
+import React, { useState, useEffect, useContext } from "react"
+import { ApiUrls } from "../ApiUrls"
+import Swal from "sweetalert2"
 
 const OrdersMain = () => {
 
-    //ALUMNO
-    const location = useLocation();
-    const student = location.state && location.state?.student;
-    //EQUIPO
-    const [equipmentOptions, setEquipmentOptions] = useState([]);
-    const [selectedOption, setSelectedOption] = useState("");
-    const [selectedEquipment, setSelectedEquipment] = useState('');
-    const [equipmentList, setEquipmentList] = useState([]);
-    
+    const location = useLocation()
+    const navigate = useNavigate()
+    const urls = useContext(ApiUrls)
+    const student = location.state && location.state?.student
+    const [equipmentOptions, setEquipmentOptions] = useState([])
+    const [selectedOption, setSelectedOption] = useState("equipment")
+    const [selectedEquipment, setSelectedEquipment] = useState('')
+    const [selectedSubject, setSelectedSubject] = useState(null)
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [equipmentList, setEquipmentList] = useState([])
+
+    const [equipment, setEquipment] = useState([])
+    const [projector, setProjector] = useState([])
+
+    useEffect(() => {
+        fetchEquipmentData()
+    }, [selectedOption])
 
     const fetchEquipmentData = async () => {
         try {
-            const resEquipment = await axios.get("http://localhost:8000/equipment/equipment-order");
-            const equipmentData = resEquipment.data;
-            const resProjector = await axios.get("http://localhost:8000/equipment/projector-order");
-            const projectorData = resProjector.data;
+            const resEquipment = await axios.get(urls.obtainEquipmentOrder)
+            const equipmentData = resEquipment.data
+            setEquipment(resEquipment.data)
+
+            const resProjector = await axios.get(urls.obtainProjectorOrder)
+            const projectorData = resProjector.data
+            setProjector(resProjector.data)
+
             let options = []
-            // Procesa los datos recibidos y obtén las opciones para el Form.Select
+
             if (selectedOption === "equipment") {
-                options = equipmentData.map((item) => item.equipment_name);
+                const equipmentNames = equipmentData.map((item) => item.equipment_name)
+                options = equipmentNames.reduce((acc, name) => {
+                    if (!acc.includes(name)) {
+                        acc.push(name)
+                    }
+                    return acc
+                }, [])
             } else if (selectedOption === "projector") {
-                options = projectorData.map((item) => item.equipment_name);
+                options = projectorData.map((item) => {
+                    if (item.hdmi) {
+                        return `HDMI - ${item.equipment_number}`
+                    } else {
+                        return `VGA - ${item.equipment_number}`
+                    }
+                })
             }
-
-
-            // Establece las opciones en el estado
-            setEquipmentOptions(options);
+            setEquipmentOptions(options)
         } catch (error) {
-            console.error("Error fetching equipment data:", error);
+            console.error("Error fetching equipment data:", error)
         }
-    };
+    }
+
+    const handleSelectSubject = (subject) => {
+        if (subject.target.value !== '-1') {
+            setSelectedSubject(subject.target.value)
+        }
+    }
 
     useEffect(() => {
-        fetchEquipmentData();
-    }, [selectedOption]);
+        fetchTeacherData()
+    }, [selectedSubject])
 
-
+    const fetchTeacherData = async () => {
+        try {
+            const res = await axios.get(urls.getTeacherSubject + selectedSubject)
+            setSelectedTeacher(res.data.teacher)
+        } catch (error) {
+            console.error("Error fetching teacher data:", error)
+        }
+    }
 
     const handleAddEquipment = () => {
         if (selectedEquipment) {
-            setEquipmentList([...equipmentList, selectedEquipment]);
-            setSelectedEquipment('');
+            if (selectedOption === 'equipment') {
+                const existingEquipment = equipmentList.find(
+                    (equipment) => equipment.name === selectedEquipment
+                )
+
+                if (existingEquipment) {
+                    const updatedEquipmentList = equipmentList.map((equipment) => {
+                        if (equipment.name === selectedEquipment) {
+                            return {
+                                ...equipment,
+                                quantity: equipment.quantity + 1
+                            }
+                        }
+                        return equipment;
+                    })
+
+                    setEquipmentList(updatedEquipmentList)
+                } else {
+                    const newEquipment = {
+                        name: selectedEquipment,
+                        quantity: 1
+                    }
+                    setEquipmentList([...equipmentList, newEquipment])
+                }
+                setSelectedEquipment('')
+            } else {
+                const newProjector = {
+                    name: selectedEquipment,
+                    quantity: 1
+                }
+                setEquipmentList([...equipmentList, newProjector])
+                setEquipmentOptions(equipmentOptions.filter(option => option !== selectedEquipment))
+                setSelectedEquipment('')
+            }
         }
-    };
+    }
+
     const handleRemoveEquipment = (index) => {
-        const updatedList = [...equipmentList];
-        updatedList.splice(index, 1);
-        setEquipmentList(updatedList);
-      };
+        const updatedList = [...equipmentList]
+        updatedList.splice(index, 1)
+        setEquipmentList(updatedList)
+    }
+
+    const UserNoExist = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Usuario no encontrado',
+            text: 'Favor de iniciar sesión para poder solicitar pedido',
+        }).then(response => {
+            navigate('/')
+        })
+    }
+
+    const confirmCancelLoan = () => {
+        Swal.fire({
+            title: 'Advertencia',
+            text: "¿Estas seguro de cancelar el pedido?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            confirmButtonColor: '#f53333',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((response) => {
+            if (response.isConfirmed) {
+                navigate('/')
+            }
+        })
+    }
+
+    const confirmOrderEquipment = () => {
+        Swal.fire({
+            title: 'Solicitar pedido',
+            text: "Estas a punto de enviar el pedido. ¿Deseas continuar?",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((response) => {
+            if (response.isConfirmed) {
+                orderEquipment()
+            }
+        })
+    }
+
+    const orderEquipment = async () => {
+        const res = await axios.post(urls.orderEquipment, {
+            hours: 1,
+            class: 'S8A',
+            members: 1,
+            student: student.control_number,
+            teacher: selectedTeacher.control_number,
+            subject: Number(selectedSubject),
+            equipments: equipmentList
+        })
+
+        if (res.data === true) {
+            Swal.fire({
+                title: 'Solicitud exitosa',
+                text: `Tu pedido ha sido solicitado de manera excitosa. Por favor, acercate a caseta para recoger tu pedido.`,
+                icon: 'success',
+                confirmButtonText: 'Ok',
+            }).then((response) => {
+                navigate('/')
+            })
+        } else {
+            Swal.fire({
+                title: 'Error al solicitar',
+                text: `${res.data} excede del limite en stock`,
+                icon: 'error',
+            })
+        }
+    }
 
     return (
-        <Container fluid className="p-0">
-
-            <Navbar style={{ backgroundColor: '#1D3A69' }} variant="dark" expand="lg">
-                <Container>
-                    <Navbar.Brand>
-                        <CDBBox display="flex" flex="fill" alignItems="center">
-                            <img
-                                alt='DMCLAB Logo'
-                                src={DMCLAB}
-                                width="45"
-                                height="45"
-                            />
-                            <h3 className="m-0 ms-3"><strong>TECNM</strong> CAMPUS HERMOSILLO</h3>
-                        </CDBBox>
-                    </Navbar.Brand>
-                </Container>
-            </Navbar>
-
-            <Container fluid>
-                <CDBBox display="flex" flex="fill" className="mb-2" justifyContent="center">
-                    <Form style={{ width: '100%' }}>
-                        <h4 className="fw-bold my-4">Datos del solicitante</h4>
+        <>
+            {student ? (
+                <>
+                    <Navbar style={{ backgroundColor: '#1D3A69' }} variant="dark" expand="lg">
                         <Container>
-                            <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
-                                <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Nombres</h6>
-                                <p className="m-0">{student.name + " " + student.first_last_name + " " + student.second_last_name}</p>
-                            </CDBBox>
-
-                            <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
-                                <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Carrera</h6>
-                                <p className="m-0">{student && student.career && student.career.career}</p>
-                                <p className="m-0">Carrera</p>
-                            </CDBBox>
-
-                            <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
-                                <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Materia</h6>
-                                <Form.Select>
-                                    {student && student.enrolled && student.enrolled.map((enrollment) => (
-                                        <option key={enrollment.subject}>
-                                            {enrollment.subject.subject}
-                                        </option>
-                                    ))}
-                                </Form.Select>
-                            </CDBBox>
-
-                            <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
-                                <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Maestro</h6>
-                                <Form.Select>
-                                    {student && student.enrolled && student.enrolled.map((enrollment) => (
-                                        <option key={enrollment.subject.teacher.control_number}>
-                                            {enrollment.subject.teacher.name + " " + enrollment.subject.teacher.first_last_name + " " + enrollment.subject.teacher.second_last_name}
-                                        </option>
-                                    ))}
-                                </Form.Select>
-                            </CDBBox>
-
-                            <CDBBox display="flex" alignItems="center" mb={2}>
-                                <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Hora</h6>
-                                <Form.Select style={{ width: 'auto' }}>
-                                    <option>1</option>
-                                    <option>2</option>
-                                </Form.Select>
-                            </CDBBox>
+                            <Navbar.Brand>
+                                <CDBBox display="flex" flex="fill" alignItems="center">
+                                    <img
+                                        alt='DMCLAB Logo'
+                                        src={DMCLAB}
+                                        width="45"
+                                        height="45"
+                                    />
+                                    <h3 className="m-0 ms-3"><strong>TECNM</strong> CAMPUS HERMOSILLO</h3>
+                                </CDBBox>
+                            </Navbar.Brand>
                         </Container>
+                    </Navbar>
 
-                        <hr className="mx-4" />
-                        <FormGroup className="mb-2 mx-5">
-                            <Row className="d-flex mb-2">
-                                <Col>
-                                    <h6 className="fw-bold mb-0" style={{ minWidth: '4em' }}>Solicitar:</h6>
-                                </Col>
-                                <Col className="d-flex">
-                                    <Form.Check
-                                        type="radio"
-                                        label="Equipo"
-                                        name="equipmentType"
-                                        className="me-3"
-                                        id="equipmentOption"
-                                        checked={selectedOption === "equipment"}
-                                        onChange={() => setSelectedOption("equipment")}
-                                    />
-                                    <Form.Check
-                                        type="radio"
-                                        label="Cañon"
-                                        name="equipmentType"
-                                        id="projectorOption"
-                                        checked={selectedOption === "projector"}
-                                        onChange={() => setSelectedOption("projector")}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="d-flex mb-3">
-                                <Col className="d-flex">
-                                    <h6 className="fw-bold mb-0" style={{ minWidth: '4em' }}>Agregar Equipo</h6>
+                    <Container style={{ flex: 1 }}>
+                        <CDBBox display="flex" flex="fill" className="mb-2" justifyContent="center">
+                            <Form style={{ width: '100%' }}>
+                                <h4 className="fw-bold my-4">Datos del solicitante</h4>
+                                <Container>
+                                    <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
+                                        <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Nombres</h6>
+                                        <p className="m-0">{student.name + " " + student.first_last_name + " " + student.second_last_name}</p>
+                                    </CDBBox>
 
-                                </Col>
-                                <Col>
-                                    <Form.Select className="me-3" onChange={(e) => setSelectedEquipment(e.target.value)} value={selectedEquipment}>
-                                        {equipmentOptions.length > 0 && (
-                                            <React.Fragment>
-                                                <option value="">Seleccione una opción</option>
-                                                {equipmentOptions.map((option, index) => (
-                                                    <option key={index}>{option}</option>
+                                    <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
+                                        <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Carrera</h6>
+                                        <p className="m-0">{student && student.career && student.career.career}</p>
+                                    </CDBBox>
+
+                                    <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
+                                        <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Materia</h6>
+                                        <Form.Select onChange={handleSelectSubject}>
+                                            <option value="-1">
+                                                Seleccione una materia
+                                            </option>
+                                            {student && student.enrolled && student.enrolled.map((enrollment) => (
+                                                <option key={enrollment.subject.id} value={enrollment.subject.id}>
+                                                    {enrollment.subject.subject}
+                                                </option>
+                                            ))}
+                                        </Form.Select>
+                                    </CDBBox>
+
+                                    <CDBBox display="flex" flex="fill" alignItems="center" mb={2}>
+                                        <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Maestro</h6>
+                                        <p className="m-0">{selectedTeacher ? (selectedTeacher.name + " " + selectedTeacher.first_last_name + " " + selectedTeacher.second_last_name) : ''}</p>
+                                    </CDBBox>
+
+                                    <CDBBox display="flex" alignItems="center" mb={2}>
+                                        <h6 className="fw-bold mb-0 me-3" style={{ minWidth: '4em' }}>Hora</h6>
+                                        <Form.Select style={{ width: 'auto' }}>
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </Form.Select>
+                                    </CDBBox>
+                                </Container>
+
+                                <hr className="mx-4 my-4" />
+                                <FormGroup className="mb-2 mx-5">
+                                    <CDBBox display="flex" flex="fill" mb={2}>
+                                        <CDBBox display="flex" flex="fill" alignItems="center">
+                                            <h6 className="fw-bold mb-0" style={{ minWidth: '4em' }}>Solicitar:</h6>
+                                        </CDBBox>
+                                        <CDBBox display="flex" flex="fill" alignItems="center">
+                                            <Form.Check
+                                                type="radio"
+                                                label="Equipo"
+                                                name="equipmentType"
+                                                className="me-3"
+                                                id="equipmentOption"
+                                                checked={selectedOption === "equipment"}
+                                                onChange={() => setSelectedOption("equipment")}
+                                            />
+                                            <Form.Check
+                                                type="radio"
+                                                label="Cañon"
+                                                name="equipmentType"
+                                                id="projectorOption"
+                                                checked={selectedOption === "projector"}
+                                                onChange={() => setSelectedOption("projector")}
+                                            />
+                                        </CDBBox>
+                                    </CDBBox>
+                                    <CDBBox display="flex" flex="fill" mb={4}>
+                                        <CDBBox display="flex" flex="fill" alignItems="center">
+                                            <h6 className="fw-bold mb-0" style={{ minWidth: '4em' }}>Agregar Equipo</h6>
+                                        </CDBBox>
+                                        <CDBBox display="flex" flex="fill">
+                                            <Form.Select className="me-3" onChange={(e) => setSelectedEquipment(e.target.value)} value={selectedEquipment}>
+                                                {equipmentOptions.length > 0 && (
+                                                    <React.Fragment>
+                                                        <option value="">Seleccione una opción</option>
+                                                        {equipmentOptions.map((option, index) => (
+                                                            <option key={index}>{option}</option>
+                                                        ))}
+                                                    </React.Fragment>
+                                                )}
+                                            </Form.Select>
+                                            <Button variant="success" size="sm" style={{ borderRadius: '30px' }} onClick={handleAddEquipment}>
+                                                <CDBIcon icon="plus" />
+                                            </Button>
+                                        </CDBBox>
+                                    </CDBBox>
+                                    <div style={{ borderRadius: '10px', overflow: 'hidden' }} className="mb-5">
+                                        <CDBTable striped hover responsive maxHeight="30vh" scrollY borderless className="mb-0">
+                                            <CDBTableHeader>
+                                                <tr style={{ textAlign: 'center', backgroundColor: '#1D3A69', color: 'white' }}>
+                                                    <th>Equipo</th>
+                                                    <th>Cantidad</th>
+                                                    <th></th>
+                                                </tr>
+                                            </CDBTableHeader>
+                                            <CDBTableBody>
+                                                {equipmentList.map((equipment, index) => (
+                                                    <tr key={index}>
+                                                        <td style={{ verticalAlign: 'middle' }}>
+                                                            {equipment.name}
+                                                        </td>
+                                                        <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{equipment.quantity}</td>
+                                                        <td style={{ textAlign: 'center' }}>
+                                                            <Button
+                                                                variant="danger"
+                                                                className="fw-bold"
+                                                                size="sm"
+                                                                style={{ borderRadius: '30px', height: '38px' }}
+                                                                onClick={() => handleRemoveEquipment(index)}
+                                                            >
+                                                                <CDBIcon icon="trash" />
+                                                            </Button>
+                                                        </td>
+                                                    </tr>
                                                 ))}
-                                            </React.Fragment>
-                                        )}
-                                    </Form.Select>
-                                </Col>
+                                            </CDBTableBody>
+                                        </CDBTable>
+                                    </div>
+                                    <Row className="mb-2 justify-content-end" sm="4">
+                                        <Button variant="danger" size="lg" onClick={confirmCancelLoan}>Cancelar</Button>
+                                    </Row>
+                                    <Row className="justify-content-end" sm="4">
+                                        <Button variant="success" size="lg" onClick={confirmOrderEquipment}>Solicitar</Button>
+                                    </Row>
 
+                                </FormGroup>
+                            </Form>
+                        </CDBBox>
+                    </Container>
+                </>
+            ) : (
+                <UserNoExist />
+            )}
 
-                                <Col >
-                                    <Button variant="success" style={{ borderRadius: '30px' }} onClick={handleAddEquipment}>+</Button>
-                                </Col>
-                            </Row>
-                            <Container>
-                                <Row className="d-flex mb-2">
-                                    <Col><Form.Label>Equipo</Form.Label></Col>
-                                    <Col><Form.Label>Cantidad</Form.Label></Col>
-                                    <hr />
-                                </Row>
-                                <Row>
-                                    
-                                    <Col> {equipmentList.map((equipment, index) => (
-                                        
-                                        <Row key={index} className="d-flex mb-2">
-                                        <Col className="mb-3">
-                                          <label>{equipment}</label>
-                                        </Col>
-                                       <Col></Col> 
-                                        <Col>
-                                          <Button
-                                            variant="danger"
-                                            style={{ borderRadius: '30px' }}
-                                            onClick={() => handleRemoveEquipment(index)}
-                                          >
-                                            -
-                                          </Button>
-                                        </Col>
-                                      </Row>
-                                    ))}</Col>
-                                </Row>
-                                <Row className="d-flexx mb-2">
-                                </Row>
-                            </Container>
-                            <Container className="mt-5">
-                                <Row className="mb-2 justify-content-end" sm="4">
-                                    <Button variant="danger" size="lg">Cancelar</Button>
-                                </Row>
-                                <Row className="justify-content-end" sm="4">
-                                    <Button variant="success" size="lg">Solicitar</Button>
-                                </Row>
-                            </Container>
-                        </FormGroup>
-                    </Form>
-                </CDBBox>
-            </Container>
-        </Container>
+        </>
     )
 }
 export default OrdersMain

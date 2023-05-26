@@ -1,48 +1,58 @@
 import { createContext } from "react";
 
+const host = "http://localhost:8000"
+
 export const ApiUrls = createContext({
     // Staff
-    staff: 'http://localhost:8000/staff/all/',
-    obtainStaff: 'http://localhost:8000/staff/one/',
-    obtainStaffPhoto: 'http://localhost:8000/staff/one/photo/',
-    addStaff: 'http://localhost:8000/staff/',
-    deleteStaff: 'http://localhost:8000/staff/delete/',
+    staff: host + '/staff/all/',
+    obtainStaff: host + '/staff/one/',
+    obtainStaffPhoto: host + '/staff/one/photo/',
+    addStaff: host + '/staff/',
+    deleteStaff: host + '/staff/delete/',
 
     // Users
-    addUser: 'http://localhost:8000/user/',
-    deleteUser: 'http://localhost:8000/user/delete/',
+    addUser: host + '/user/',
+    obtainInfoUserLogged: host + '/user/one/',
+    deleteUser: host + '/user/delete/',
+    loginUser: host + '/auth/login',
 
     // Equipment
-    equipment: 'http://localhost:8000/equipment/all',
-    addEquipment: 'http://localhost:8000/equipment/',
-    obtainEquipmentPhoto: 'http://localhost:8000/equipment/one/photo/',
-    changeDamaged: 'http://localhost:8000/equipment/damaged/',
-    deleteEquipment: 'http://localhost:8000/equipment/delete/',
+    equipment: host + '/equipment/all',
+    addEquipment: host + '/equipment/',
+    obtainEquipmentPhoto: host + '/equipment/one/photo/',
+    changeDamaged: host + '/equipment/damaged/',
+    deleteEquipment: host + '/equipment/delete/',
+    obtainEquipmentOrder: host + '/equipment/equipment-order/',
+    obtainProjectorOrder: host + '/equipment/projector-order/',
 
     // Career
-    addCareers: 'http://localhost:8000/career/create_many/',
-    validateCareers: 'http://localhost:8000/career/validate/',
+    addCareers: host + '/career/create_many/',
+    validateCareers: host + '/career/validate/',
 
     // Teacher
-    addTeachers: 'http://localhost:8000/teacher/create_many/',
-    validateTeachers: 'http://localhost:8000/teacher/validate/',
-    teachers: 'http://localhost:8000/teacher/all/',
+    addTeachers: host + '/teacher/create_many/',
+    validateTeachers: host + '/teacher/validate/',
+    teachers: host + '/teacher/all/',
 
     // Students
-    addStudents: 'http://localhost:8000/student/create_many/',
-    validateStudents: 'http://localhost:8000/student/validate/',
-    students: 'http://localhost:8000/student/all/',
-    addStudent: 'http://localhost:8000/student/',
-    loginStudent: 'http://localhost:8000/loginStudent/',
+    addStudents: host + '/student/create_many/',
+    validateStudents: host + '/student/validate/',
+    students: host + '/student/all/',
+    addStudent: host + '/student/',
+    loginStudent: host + '/student/login/',
 
     // Subjects
-    addSubjects: 'http://localhost:8000/subject/create_many/',
-    validateSubjects: 'http://localhost:8000/subject/validate/',
+    addSubjects: host + '/subject/create_many/',
+    validateSubjects: host + '/subject/validate/',
+    getTeacherSubject: host + '/subject/teacher/',
 
     // Enrolled
-    addEnrolleds: 'http://localhost:8000/enrolled/create_many/',
-    validateEnrolleds: 'http://localhost:8000/enrolled/validate/',
+    addEnrolleds: host + '/enrolled/create_many/',
+    validateEnrolleds: host + '/enrolled/validate/',
 
     //Requests
-    equipmentRequests: 'http://localhost:8000/solicitar-equipo/'
+    equipmentRequests: host + '/solicitar-equipo/',
+
+    // Loan
+    orderEquipment: host + '/loan/'
 })

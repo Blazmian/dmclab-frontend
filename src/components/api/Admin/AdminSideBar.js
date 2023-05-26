@@ -26,7 +26,7 @@ const AdminSideBar = () => {
 
     return (
         <div style={{ display: 'flex', height: '95vh', overflow: 'scroll initial' }}>
-            <CDBSidebar backgroundColor="#193158" textColor="#fff" toggled>
+            <CDBSidebar backgroundColor="#193158" textColor="#fff">
                 <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
                     <CDBBox display="flex" alignItems="center">
                         <img src={DMCLABLOGO} alt="DMC LAB LOGO" style={{ width: '150px' }} />

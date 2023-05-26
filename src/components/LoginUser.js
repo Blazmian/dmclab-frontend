@@ -1,17 +1,19 @@
 import axios from "axios"
 import { CDBBox, CDBBtn, CDBCard, CDBCardBody, CDBContainer } from "cdbreact"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Container, Form, FormGroup, Navbar } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import LogoITH from '../img/ITH.png'
 import { checkAuth } from "../config/Auth"
+import { ApiUrls } from "./api/ApiUrls"
 
 const Login = () => {
 
     const [authenticated, setAuthenticated] = useState(checkAuth());
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
+    const urls = useContext(ApiUrls)
 
     useEffect(() => {
         if (authenticated) {
@@ -35,7 +37,7 @@ const Login = () => {
                 username: user,
                 password: pass
             }
-            const res = await axios.post('http://localhost:8000/auth/login', postData)
+            const res = await axios.post(urls.loginUser, postData)
                 .catch(function (error) {
                     const statusError = error.response.status
                     if (statusError === 401 || statusError === 404) {

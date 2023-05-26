@@ -154,6 +154,12 @@ const CreateEquipment = ({ show, handleClose, handleUpdateEquipment }) => {
         reader.readAsDataURL(file)
     }
 
+    const handleChangeEquipment = (event) => {
+        if (event.target.value !== "-1") {
+            form.equipment = event.target.value
+        }
+    }
+
     return (
         <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
@@ -211,16 +217,46 @@ const CreateEquipment = ({ show, handleClose, handleUpdateEquipment }) => {
                             <CDBBox flex="fill">
                                 <Form.Group>
                                     <Form.Label>Equipo</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        placeholder="Introduce el equipo"
-                                        maxLength={50}
-                                        value={form.equipment}
-                                        onChange={(e) => setField('equipment', e.target.value)}
-                                        isInvalid={!!errors.equipment}
-                                        disabled={isDisabled}
-                                    />
+                                    {selectedOption === 'equipment' ? (
+                                        <Form.Select
+                                            required
+                                            onChange={(e) => setField('equipment', e.target.value)}
+                                            isInvalid={!!errors.equipment}
+                                            disabled={isDisabled}
+                                        >
+                                            <option value={'-1'}>Seleccione un material</option>
+                                            <option>Multímetro Digital</option>
+                                            <option>Fuente de C.D</option>
+                                            <option>Osciloscopio</option>
+                                            <option>Generador de Funciones</option>
+                                            <option>Trazador de Curvas</option>
+                                            <option>Decada</option>
+                                            <option>Medidor L.C.R</option>
+                                            <option>Pluma Lógica</option>
+                                            <option>Unidad PU 2000</option>
+                                            <option>Tarjeta EB</option>
+                                            <option>Tarjeta Lab Volt</option>
+                                            <option>Programador de Memorias</option>
+                                            <option>Estrenador P.16</option>
+                                            <option>Accesorios P.L.C.</option>
+                                            <option>Multímetro de Gancho</option>
+                                            <option>Quemador de Memorias</option>
+                                            <option>Tarjetas Nexys II</option>
+                                            <option>Cables Banana P.L.C.</option>
+                                            <option>Caimancitos</option>
+                                        </Form.Select>
+                                    ) : (
+                                        <Form.Control
+                                            required
+                                            type="text"
+                                            placeholder="Introduce el equipo"
+                                            maxLength={50}
+                                            value={form.equipment}
+                                            onChange={(e) => setField('equipment', e.target.value)}
+                                            isInvalid={!!errors.equipment}
+                                            disabled={isDisabled}
+                                        />
+                                    )}
                                     <Form.Control.Feedback type="invalid">
                                         {errors.equipment}
                                     </Form.Control.Feedback>
