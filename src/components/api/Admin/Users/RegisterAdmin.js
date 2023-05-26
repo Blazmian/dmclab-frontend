@@ -92,7 +92,16 @@ const RegisterAdmin = ({ id }) => {
         }
 
         return (
-            <>
+            <> <div>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script>
+            </div>
                 <Navbar bg="dark" variant="dark">
                     <Container>
                         <Navbar.Brand>
@@ -100,6 +109,7 @@ const RegisterAdmin = ({ id }) => {
                         </Navbar.Brand>
                     </Container>
                 </Navbar>
+<<<<<<< Updated upstream
                 <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -108,6 +118,9 @@ const RegisterAdmin = ({ id }) => {
 
   gtag('config', 'G-EV6GHP7VHP');
 </script></div>
+=======
+                
+>>>>>>> Stashed changes
                 <Container style={{ height: '60vh', width: '50%' }}>
                     <CDBBox display="flex" justifyContent="center" style={{ height: '100%' }} alignItems='center'>
                         <CDBBox>

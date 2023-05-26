@@ -85,15 +85,35 @@ const TypeUser = ({ user, handleUpdateUsers, handleClose }) => {
 
         return (
             <Container>
+<<<<<<< Updated upstream
                 <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+=======
+                 <div>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+>>>>>>> Stashed changes
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments)}
   gtag('js', new Date());
 
   gtag('config', 'G-EV6GHP7VHP');
+<<<<<<< Updated upstream
 </script></div>
+=======
+</script>
+            </div>
+>>>>>>> Stashed changes
                 <CDBBox display={showCreate}>
+                <div>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EV6GHP7VHP');
+</script>
+            </div>
                     <Container>
                         <Container fluid>
                             <CDBBox display="flex" flex="fill" justifyContent="center">

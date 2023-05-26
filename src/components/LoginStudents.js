@@ -51,11 +51,17 @@ const LoginStudents = () => {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments)}
   gtag('js', new Date());
+<<<<<<< Updated upstream
 
   gtag('config', 'G-EV6GHP7VHP');
 </script>
             </div>
+=======
+>>>>>>> Stashed changes
 
+  gtag('config', 'G-EV6GHP7VHP');
+</script>
+            </div>
             <CDBContainer style={{ height: '80vh' }}>
                 <CDBBox display="flex" justifyContent="center" style={{ height: '100%' }} alignItems='center'>
                     <CDBCard style={{ width: '30rem', borderRadius: '25px', boxShadow: '0px 0px 30px 5px rgba(0, 0, 0, 0.25)' }}>
