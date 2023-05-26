@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Accordion, Badge, Button, Container, ListGroup } from "react-bootstrap"
 import axios from "axios"
 import { ApiUrls } from "../../ApiUrls";
+import Swal from "sweetalert2"
+import { toast } from "react-toastify"
 
 const Orders = () => {
 
@@ -31,6 +33,27 @@ const Orders = () => {
     const handleAccordionSelect = (eventKey, loan) => {
         setActiveKey(eventKey)
         setSelectedLoan(loan)
+    }
+
+    const confirmDeliverLoan = () => {
+        Swal.fire({
+            title: `¿Entregar pedido #${selectedLoan.folio}`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Entregar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((response) => {
+            if (response.isConfirmed) {
+                deliverLoan()
+            }
+        })
+    }
+
+    const deliverLoan = async () => {
+        const res = await axios.post(urls.deliverLoan + selectedLoan.folio)
+        setSelectedLoan(null)
+        toast.info('Entregado con exito')
     }
 
     return (
@@ -104,7 +127,7 @@ const Orders = () => {
                     <p>{selectedLoan ? selectedLoan.subject.career.career : ('')}</p>
                 </Container>
                 <CDBBox display="flex" flex="column" mx={3}>
-                    <Button variant="success" className="mt-3">
+                    <Button variant="success" className="mt-3" onClick={confirmDeliverLoan}>
                         Entregar
                     </Button>
                     <Button variant="danger" className="my-3">

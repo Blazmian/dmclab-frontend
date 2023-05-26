@@ -56,4 +56,5 @@ export const ApiUrls = createContext({
     // Loan
     orderEquipment: host + '/loan/',
     obtainNotDeliveredLoan: host + '/loan/not-delivered/',
+    deliverLoan: host + '/loan/deliver-loan/',
 })
