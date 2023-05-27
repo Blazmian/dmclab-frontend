@@ -94,27 +94,17 @@ const CreateStudent = ({ show, handleClose, handleAddStudent }) => {
             <Modal.Header closeButton>
                 <Modal.Title>Agregar Alumno</Modal.Title>
             </Modal.Header>
-<<<<<<< Updated upstream
-            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-=======
-            <div>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
->>>>>>> Stashed changes
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)}
+                gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-<<<<<<< Updated upstream
-</script></div>
-=======
-</script>
-            </div>
->>>>>>> Stashed changes
+                gtag('config', 'G-EV6GHP7VHP');
+            </script>
             <Modal.Body>
                 <Form>
-                
+
 
                     <Form.Group className="mb-3 mx-5">
                         <Form.Label>Nombres</Form.Label>
@@ -164,7 +154,7 @@ const CreateStudent = ({ show, handleClose, handleAddStudent }) => {
                         </Form.Control.Feedback>
 
                     </Form.Group>
-                    
+
                     <Form.Group className="mb-3 mx-5">
                         <Form.Label>Semestre</Form.Label>
                         <Form.Control
@@ -176,7 +166,7 @@ const CreateStudent = ({ show, handleClose, handleAddStudent }) => {
                         />
                         <Form.Control.Feedback type="invalid">
                         </Form.Control.Feedback>
-                        </Form.Group>
+                    </Form.Group>
                     <Form.Group className="mb-3 mx-5">
                         <Form.Label>Carrera</Form.Label>
                         <Form.Control
@@ -199,7 +189,7 @@ const CreateStudent = ({ show, handleClose, handleAddStudent }) => {
                         <Form.Control.Feedback type="invalid">
                         </Form.Control.Feedback>
                     </Form.Group>
-                    
+
                     <CDBBox display="flex" justifyContent="end" className="mt-4">
                         <Button variant="secondary" onClick={handleClose}>Cancelar</Button>
                         <Button type="submit" variant="primary" className="ms-3" onClick={handleSubmit}>Agregar Usuario</Button>

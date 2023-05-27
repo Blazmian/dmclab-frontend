@@ -7,7 +7,7 @@ import Swal from "sweetalert2"
 import { validUserName } from "../../../../tools/InputValidator"
 import { ApiUrls } from "../../ApiUrls"
 
-const RegisterReceptionist = ({id}) => {
+const RegisterReceptionist = ({ id }) => {
 
     const [user, setUser] = useState(null)
     const navigate = useNavigate()
@@ -93,14 +93,14 @@ const RegisterReceptionist = ({id}) => {
 
         return (
             <> <div>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments)}
+                    gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-</script>
+                    gtag('config', 'G-EV6GHP7VHP');
+                </script>
             </div>
                 <Navbar bg="dark" variant="dark">
                     <Container>
@@ -110,13 +110,13 @@ const RegisterReceptionist = ({id}) => {
                     </Container>
                 </Navbar>
                 <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
+                    <script>
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments)}
+                        gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-</script></div>
+                        gtag('config', 'G-EV6GHP7VHP');
+                    </script></div>
                 <Container style={{ height: '60vh', width: '50%' }}>
                     <CDBBox display="flex" justifyContent="center" style={{ height: '100%' }} alignItems='center'>
                         <CDBBox>

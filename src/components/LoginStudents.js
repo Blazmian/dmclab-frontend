@@ -45,23 +45,14 @@ const LoginStudents = () => {
             <div className='header-main'>
                 <MainNavBar />
             </div>
-            <div>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
-<<<<<<< Updated upstream
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)}
+                gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-</script>
-            </div>
-=======
->>>>>>> Stashed changes
-
-  gtag('config', 'G-EV6GHP7VHP');
-</script>
-            </div>
+                gtag('config', 'G-EV6GHP7VHP');
+            </script>
             <CDBContainer style={{ height: '80vh' }}>
                 <CDBBox display="flex" justifyContent="center" style={{ height: '100%' }} alignItems='center'>
                     <CDBCard style={{ width: '30rem', borderRadius: '25px', boxShadow: '0px 0px 30px 5px rgba(0, 0, 0, 0.25)' }}>

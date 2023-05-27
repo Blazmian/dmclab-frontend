@@ -99,32 +99,22 @@ const CreateUser = ({ show, handleClose, handleAddUser }) => {
         <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Agregar Usuarios</Modal.Title>
-<<<<<<< Updated upstream
-            </Modal.Header><div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-=======
             </Modal.Header>
-            <div>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
->>>>>>> Stashed changes
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)}
+                gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-<<<<<<< Updated upstream
-</script></div>
-=======
-</script>
-            </div>
->>>>>>> Stashed changes
+                gtag('config', 'G-EV6GHP7VHP');
+            </script>
             <Modal.Body>
                 <Form>
                     <CDBBox display="flex" flex="fill" justifyContent="center" className="mb-3">
                         {imagePreview ?
-                            <img src={imagePreview} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px'}} />
+                            <img src={imagePreview} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px' }} />
                             :
-                            <img src={UserDefaultImg} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px'}}></img>
+                            <img src={UserDefaultImg} alt="Preview" style={{ height: '200px', width: '200px', borderRadius: '360px' }}></img>
                         }
                     </CDBBox>
                     <Form.Group className="mb-3 mx-5">
