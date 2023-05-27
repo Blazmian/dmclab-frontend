@@ -44,28 +44,15 @@ const Students = () => {
     }
 
     return (
-<<<<<<< Updated upstream
         <>
-        <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)}
+                gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-</script></div>
-=======
-        <><div>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments)}
-gtag('js', new Date());
-
-gtag('config', 'G-EV6GHP7VHP');
-</script>
-        </div>
->>>>>>> Stashed changes
+                gtag('config', 'G-EV6GHP7VHP');
+            </script>
             <NavBarAdmin icon={'user-graduate'} title={'Alumnos'} />
             <CreateStudent show={show} handleClose={handleClose} handleAddStudent={handleUpdateStudents} />
             <CDBContainer className="mt-5 mb-3">

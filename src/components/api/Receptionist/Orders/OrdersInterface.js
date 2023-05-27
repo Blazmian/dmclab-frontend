@@ -58,11 +58,7 @@ const Orders = () => {
 
     return (
         <CDBBox display="flex" style={{ flex: 1 }} className="p-0">
-<<<<<<< Updated upstream
             <div>
-=======
-             <div>
->>>>>>> Stashed changes
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

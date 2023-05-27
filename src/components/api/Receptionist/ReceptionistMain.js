@@ -8,11 +8,7 @@ import ReceptionistSideBar from "./ReceptionistSideBar"
 const ReceptionistMain = () => {
     return (
         <CDBBox display="flex" flex="column" style={{ height: '100vh' }}>
-<<<<<<< Updated upstream
-            <div>
-=======
              <div>
->>>>>>> Stashed changes
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

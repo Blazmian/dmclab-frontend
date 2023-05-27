@@ -17,28 +17,14 @@ const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
     }
 
     return (
-<<<<<<< Updated upstream
-        <>
-        <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
+        <><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)}
+                gtag('js', new Date());
 
-  gtag('config', 'G-EV6GHP7VHP');
-</script></div>
-=======
-        <><div>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments)}
-gtag('js', new Date());
-
-gtag('config', 'G-EV6GHP7VHP');
-</script>
-        </div>
->>>>>>> Stashed changes
+                gtag('config', 'G-EV6GHP7VHP');
+            </script>
             <CDBContainer>
                 <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
                     <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
