@@ -108,15 +108,6 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
             <Modal.Header closeButton>
                 <Modal.Title><BadgesEquipment equipment={equipment} />{' ' + equipment.equipment_name}</Modal.Title>
             </Modal.Header>
-            <div>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments)}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-EV6GHP7VHP');</script>
-
-            </div>
 
             <Modal.Body>
                 <CDBContainer fluid className="mb-4">

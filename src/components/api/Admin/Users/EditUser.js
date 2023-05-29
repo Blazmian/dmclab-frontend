@@ -80,14 +80,7 @@ const EditUser = ({ user, showModal, handleClose }) => {
             <Modal.Header closeButton>
                 <Modal.Title>Editar Usuario</Modal.Title>
             </Modal.Header>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments)}
-                gtag('js', new Date());
-
-                gtag('config', 'G-EV6GHP7VHP');
-            </script>
+            
             <Modal.Body>
                 <Form>
                     <Form.Group className="mb-3">

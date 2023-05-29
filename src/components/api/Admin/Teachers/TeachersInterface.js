@@ -44,25 +44,8 @@ const Teachers = () => {
     }
 
     return (
-        <>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments)}
-                gtag('js', new Date());
-
-                gtag('config', 'G-EV6GHP7VHP');
-            </script>
-
-            <NavBarAdmin icon={'user-graduate'} title={'Docentes'} />
-            <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments)}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-EV6GHP7VHP');
-                </script></div>
+        <>            
+            <NavBarAdmin icon={'user-graduate'} title={'Docentes'} />            
             <CDBContainer className="mt-5 mb-3">
                 <CDBBox display="flex">
                     <CDBBox display="flex" flex="fill" justifyContent="end">

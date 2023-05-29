@@ -65,30 +65,10 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
 
     return (
         <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
-            <div>
-
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments)}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-EV6GHP7VHP');
-                </script>
-
-            </div>
             <Modal.Header closeButton>
                 <Modal.Title>{user.name + " " + user.first_last_name + " " + user.second_last_name}</Modal.Title>
-            </Modal.Header> <div>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
-
-  gtag('config', 'G-EV6GHP7VHP');
-</script>
-            </div>
+            </Modal.Header>
+            
             <Modal.Body>
                 <CDBContainer fluid className="mb-4">
                     <CDBBox display="flex" flex="fill" justifyContent="center">

@@ -23,6 +23,7 @@ const OrdersMain = () => {
     const [equipment, setEquipment] = useState([])
     const [projector, setProjector] = useState([])
 
+
     useEffect(() => {
         fetchEquipmentData()
     }, [selectedOption])
@@ -201,16 +202,7 @@ const OrdersMain = () => {
     return (
         <>
             {student ? (
-                <> <div>
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments)}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-EV6GHP7VHP');
-    </script>
-                </div>
+                <>
                     <Navbar style={{ backgroundColor: '#1D3A69' }} variant="dark" expand="lg">
                         <Container>
                             <Navbar.Brand>

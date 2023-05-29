@@ -92,16 +92,7 @@ const RegisterReceptionist = ({ id }) => {
         }
 
         return (
-            <> <div>
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments)}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-EV6GHP7VHP');
-                </script>
-            </div>
+            <> 
                 <Navbar bg="dark" variant="dark">
                     <Container>
                         <Navbar.Brand>
@@ -109,14 +100,6 @@ const RegisterReceptionist = ({ id }) => {
                         </Navbar.Brand>
                     </Container>
                 </Navbar>
-                <div><script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-                    <script>
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments)}
-                        gtag('js', new Date());
-
-                        gtag('config', 'G-EV6GHP7VHP');
-                    </script></div>
                 <Container style={{ height: '60vh', width: '50%' }}>
                     <CDBBox display="flex" justifyContent="center" style={{ height: '100%' }} alignItems='center'>
                         <CDBBox>

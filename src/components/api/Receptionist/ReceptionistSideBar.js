@@ -7,14 +7,6 @@ const ReceptionistSideBar = () => {
 
     return (
         <div style={{ display: 'flex', overflow: 'scroll initial' }}>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments)}
-                gtag('js', new Date());
-
-                gtag('config', 'G-EV6GHP7VHP');
-            </script>
             <CDBSidebar textColor="#fff" backgroundColor="#212428" toggled>
                 <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
                     <CDBBox display="flex" alignItems="center">

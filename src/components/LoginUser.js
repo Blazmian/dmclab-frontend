@@ -65,14 +65,7 @@ const Login = () => {
                     <Navbar.Brand style={{ fontSize: 30 }}><strong>TECNM</strong> Campus Hermosillo</Navbar.Brand>
                 </Container>
             </Navbar>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments)}
-                gtag('js', new Date());
-
-                gtag('config', 'G-EV6GHP7VHP');
-            </script>
+            
             <CDBContainer style={{ height: '80vh' }}>
                 <CDBBox display="flex" justifyContent="center" style={{ height: '100%' }} alignItems='center'>
                     <CDBCard style={{ width: '30rem', borderRadius: '10px', boxShadow: '0px 0px 30px 5px rgba(0, 0, 0, 0.25)' }}>

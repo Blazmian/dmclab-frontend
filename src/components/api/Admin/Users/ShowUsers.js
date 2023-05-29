@@ -17,27 +17,9 @@ const ShowUsers = ({ users, setUsers, handleUpdateUsers }) => {
     }
     console.log(users)
     return (
-        <> <div>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments)}
-gtag('js', new Date());
-
-gtag('config', 'G-EV6GHP7VHP');
-</script>
-        </div>
+        <> 
             <ShowInfoUser show={show} handleClose={handleClose} handleUpdateUsers={handleUpdateUsers} user={user} />
-            <div>
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV6GHP7VHP"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments)}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-EV6GHP7VHP');
-                </script>
-            </div>
+           
             <CDBContainer>
                 <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
                     <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
