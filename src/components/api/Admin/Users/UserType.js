@@ -70,7 +70,7 @@ const TypeUser = ({ user, handleUpdateUsers, handleClose }) => {
         const [encodedURL, setEncodedURL] = useState('')
 
         const encodeURL = (userType) => {
-            let uri = `https://dmclab.online/register/`
+            let uri = `http://localhost:3000/register/`
             setShowCreate('none')
             setShowLink('')
             let encodeDestinyRoute = `${btoa(userType)}`

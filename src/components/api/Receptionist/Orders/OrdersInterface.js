@@ -51,7 +51,7 @@ const Orders = () => {
     }
 
     const deliverLoan = async () => {
-        const res = await axios.post(urls.deliverLoan + selectedLoan.folio)
+        await axios.post(urls.deliverLoan + selectedLoan.folio)
         setSelectedLoan(null)
         toast.info('Entregado con exito')
     }

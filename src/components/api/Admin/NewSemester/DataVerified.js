@@ -30,7 +30,6 @@ const DataVerified = ({ data, dataVerified, title }) => {
 
     return (
         <Card className="mx-5 my-4">
-            <Updated upstream></Updated>
             <Card.Header as="h4">{title}</Card.Header>
             <Card.Body>
                 {dataVerified.noExist.length > 0 ? (

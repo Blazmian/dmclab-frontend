@@ -1,6 +1,5 @@
 import { CDBSidebar, CDBSidebarHeader, CDBSidebarFooter, CDBSidebarContent, CDBSidebarMenu, CDBSidebarMenuItem, CDBBox } from "cdbreact"
-import { NavLink, useNavigate } from "react-router-dom"
-import Swal from "sweetalert2"
+import { NavLink } from "react-router-dom"
 import DMCLABLOGO from '../../../img/DMC LAB LIGHT LOGO.png'
 
 const ReceptionistSideBar = () => {

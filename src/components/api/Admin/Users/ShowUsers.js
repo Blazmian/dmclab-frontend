@@ -15,7 +15,6 @@ const ShowUsers = ({ users, setUsers, handleUpdateUsers }) => {
         setUser(user)
         handleShow()
     }
-    console.log(users)
     return (
         <> 
             <ShowInfoUser show={show} handleClose={handleClose} handleUpdateUsers={handleUpdateUsers} user={user} />

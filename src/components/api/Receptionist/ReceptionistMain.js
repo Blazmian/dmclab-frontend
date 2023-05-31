@@ -4,6 +4,7 @@ import { CDBBox } from "cdbreact"
 import { Route, Routes } from "react-router-dom"
 import Orders from "./Orders/OrdersInterface"
 import ReceptionistSideBar from "./ReceptionistSideBar"
+import Requests from "./Requests/RequestsInterface"
 
 const ReceptionistMain = () => {
     return (
@@ -29,7 +30,7 @@ const ReceptionistMain = () => {
                 <ReceptionistSideBar />
                 <Routes>
                     <Route path="/pedidos" element={<Orders />} />
-                    <Route path="/solicitudes" />
+                    <Route path="/solicitudes" element={<Requests />} />
                     <Route path="/reportes" />
                 </Routes>
             </CDBBox>

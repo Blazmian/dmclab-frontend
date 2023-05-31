@@ -108,7 +108,6 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
             <Modal.Header closeButton>
                 <Modal.Title><BadgesEquipment equipment={equipment} />{' ' + equipment.equipment_name}</Modal.Title>
             </Modal.Header>
-
             <Modal.Body>
                 <CDBContainer fluid className="mb-4">
                     <CDBBox display="flex" flex="fill" justifyContent="start" alignItems="center">
