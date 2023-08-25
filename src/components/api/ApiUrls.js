@@ -9,6 +9,7 @@ export const ApiUrls = createContext({
     obtainStaffPhoto: host + '/staff/one/photo/',
     addStaff: host + '/staff/',
     deleteStaff: host + '/staff/delete/',
+    modifyStaff: host + '/staff/update/',
 
     // Users
     addUser: host + '/user/',
@@ -24,6 +25,7 @@ export const ApiUrls = createContext({
     deleteEquipment: host + '/equipment/delete/',
     obtainEquipmentOrder: host + '/equipment/equipment-order/',
     obtainProjectorOrder: host + '/equipment/projector-order/',
+    modifyEquipment: host + '/equipment/update/',
 
     // Career
     addCareers: host + '/career/create_many/',
@@ -40,6 +42,7 @@ export const ApiUrls = createContext({
     students: host + '/student/all/',
     addStudent: host + '/student/',
     loginStudent: host + '/student/login/',
+    updateStudent: host + '/update/',
 
     // Subjects
     addSubjects: host + '/subject/create_many/',
