@@ -19,7 +19,7 @@ const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) =
         setIsEditMode(false); // Restablecer el estado a false al cerrar el modal
         handleClose();
     };
-  
+
     const confirmDeleteStudent = () => {
         Swal.fire({
             title: '¿Estas seguro de eliminar el usuario ' + student.name + '?',
@@ -36,7 +36,9 @@ const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) =
             }
         })
     }
-    
+    const handleUpdateStudent = () => {
+        handleUpdateStudents();  // Llama a la función de actualización en el padre
+    };
 
     const deleteStudent = async (id) => {
         const res = await axios.delete(urls.deleteStaff + id)
@@ -48,7 +50,7 @@ const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) =
             toast.error('No se pudo eliminar el usuario')
         }
     }
-    
+
     return (
         <Modal show={show} onHide={handleModalClose} aria-labelledby="contained-modal-title-vcenter" centered>
             {isEditMode ? ( // Mostrar EditUser cuando isEditMode es true
@@ -75,15 +77,18 @@ const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) =
                 </Modal.Header>
 
                 <Modal.Body>
-                    <CDBBox>
-                    <h6>Número de control</h6>
-                    <label>{student.control_number}</label>
-                    <h6>Semestre</h6>
-                    <label>{student.semester}</label>
-                    <h6>Carrera</h6>
-                    <label>{student && student.career && student.career.career}</label>
-                    </CDBBox>
-                    <ShowInfoStudent student={student} handleUpdateStudents={handleUpdateStudents} handleClose={handleClose} />
+                    {isEditMode ? (
+                        <ModifyStudent student={student} showModal={isEditMode} handleClose={() => setIsEditMode(false)} />
+                    ) : (
+                        <CDBBox>
+                            <h6>Número de control</h6>
+                            <label>{student.control_number}</label>
+                            <h6>Semestre</h6>
+                            <label>{student.semester}</label>
+                            <h6>Carrera</h6>
+                            <label>{student && student.career && student.career.career}</label>
+                        </CDBBox>
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <CDBBox display="flex" flex="fill" alignItems="center">

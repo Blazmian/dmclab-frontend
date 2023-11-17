@@ -108,7 +108,6 @@ const ModifyEquipment = ({ equipment, showModal, handleClose }) => {
     };
 
     const updateEquipment = async () => {
-        console.log("ENCHILADASA")
         const res = await axios.put('http://localhost:8000/equipment/update/' + equipment.id,
             {
                 name: form.equipment_name,            // Define un valor inicial para cada input

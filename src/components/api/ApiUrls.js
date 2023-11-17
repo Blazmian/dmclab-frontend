@@ -42,7 +42,7 @@ export const ApiUrls = createContext({
     students: host + '/student/all/',
     addStudent: host + '/student/',
     loginStudent: host + '/student/login/',
-    updateStudent: host + '/update/',
+    updateStudent: host + '/student/update/',
 
     // Subjects
     addSubjects: host + '/subject/create_many/',
