@@ -24,3 +24,29 @@ export const validUserName = (value) => {
     }
     return isValid
 }
+
+export const validateSecondLastName = (value) => {
+    let isValid = false;
+    const pattern = /^[a-zA-Z]*$|^null$|^undefined$/i; 
+    if (pattern.test(value)) {
+        isValid = true;
+    }
+    return isValid;
+};
+
+export const validateSerialNumber = (value) => {
+    let isValid = false
+    const pattern = new RegExp('/^[A-Z0-9-]{10}$/', 'i')
+    if (pattern.test(value)) {
+        isValid = true
+    }
+    return isValid
+}
+export const validateModel = (value) => {
+    let isValid = false
+    const pattern = new RegExp(/^[a-zA-Z0-9-]*$/, 'i')
+    if (pattern.test(value)) {
+        isValid = true
+    }
+    return isValid
+}

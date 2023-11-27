@@ -1,8 +1,8 @@
 import { CDBContainer, CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact"
 import { useState } from "react"
+import ShowInfoStudent from "./ShowInfoStudent"
 
 const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
-
 
     const [student, setStudent] = useState([])
 
@@ -17,7 +17,7 @@ const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
     }
 
     return (
-        <>
+        <>   <ShowInfoStudent show={show} handleClose={handleClose} handleUpdateStudent={handleUpdateStudents} student={student} />
             <CDBContainer>
                 <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
                     <CDBTable striped hover responsive maxHeight="70vh" scrollY borderless className="mb-0">
@@ -33,7 +33,7 @@ const ShowStudents = ({ students, setStudents, handleUpdateStudents }) => {
                         </CDBTableHeader>
                         <CDBTableBody>
                             {students.map((student) => (
-                                <tr key={student.control_number} style={{ textAlign: 'center' }}>
+                                <tr key={student.control_number} style={{ textAlign: 'center' }} onClick={() => handleClick(student)}>
                                     <td>{student.control_number}</td>
                                     <td>{student.name}</td>
                                     <td>{student.first_last_name}</td>

@@ -6,14 +6,11 @@ import { Button, Modal } from "react-bootstrap"
 import { toast } from "react-toastify"
 import Swal from "sweetalert2"
 import { ApiUrls } from "../../ApiUrls"
-import TypeUser from "./UserType"
-import EditUser from "./EditUser";
+import ModifyStudent from "./ModifyStudent";
 
-const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
+const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) => {
 
     const urls = useContext(ApiUrls)
-
-    const [imageUser, setImageUser] = useState(UserDefaultImg)
     const [isEditMode, setIsEditMode] = useState(false);
     const toggleEditMode = () => {
         setIsEditMode(!isEditMode);
@@ -22,31 +19,10 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
         setIsEditMode(false); // Restablecer el estado a false al cerrar el modal
         handleClose();
     };
-    useEffect(() => {
-        obtainImageUser()
-    }, [user])
 
-    const obtainImageUser = async () => {
-        if (user.length !== 0) {
-            console.log(user.id)
-            const res = await axios.get(urls.obtainStaffPhoto + user.id, { responseType: 'arraybuffer' })
-            if (res.data.byteLength > 0) {
-                let binary = '';
-                const bytes = new Uint8Array(res.data);
-                const len = bytes.byteLength;
-                for (let i = 0; i < len; i++) {
-                    binary += String.fromCharCode(bytes[i]);
-                }
-                setImageUser(binary)
-            } else {
-                setImageUser(UserDefaultImg)
-            }
-        }
-    }
-
-    const confirmDeleteUser = () => {
+    const confirmDeleteStudent = () => {
         Swal.fire({
-            title: '¿Estas seguro de eliminar el usuario ' + user.name + '?',
+            title: '¿Estas seguro de eliminar el usuario ' + student.name + '?',
             text: "Esto no se podrá revertir",
             icon: 'warning',
             showCancelButton: true,
@@ -56,16 +32,19 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
             reverseButtons: true
         }).then((response) => {
             if (response.isConfirmed) {
-                deleteUser(user.id)
+                deleteStudent(student.id)
             }
         })
     }
+    const handleUpdateStudent = () => {
+        handleUpdateStudents();  // Llama a la función de actualización en el padre
+    };
 
-    const deleteUser = async (id) => {
+    const deleteStudent = async (id) => {
         const res = await axios.delete(urls.deleteStaff + id)
         if (res.data.affected === 1) {
             toast.info('Usuario eliminado con exito')
-            handleUpdateUsers()
+            handleUpdateStudents()
             handleClose()
         } else {
             toast.error('No se pudo eliminar el usuario')
@@ -77,14 +56,14 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
             {isEditMode ? ( // Mostrar EditUser cuando isEditMode es true
                 <>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modificar Usuario</Modal.Title>
+                        <Modal.Title>Modificar Alumno</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {isEditMode ? (
-                            <EditUser user={user} showModal={isEditMode} handleClose={() => setIsEditMode(false)} />
+                            <ModifyStudent student={student} showModal={isEditMode} handleClose={() => setIsEditMode(false)} />
                         ) : (
-                            <TypeUser user={user} handleUpdateUsers={handleUpdateUsers} handleClose={handleClose} />
-                        )}<EditUser user={user} handleClose={handleClose} handleUpdateUsers={handleUpdateUsers} />
+                            <ShowInfoStudent student={student} handleUpdateStudents={handleUpdateStudents} handleClose={handleClose} />
+                        )}<ModifyStudent student={student} handleClose={handleClose} handleUpdateStudents={handleUpdateStudents} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
@@ -94,17 +73,22 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
                 </>
             ) : (<>
                 <Modal.Header closeButton>
-                    <Modal.Title>{user.name + " " + user.first_last_name + " " + user.second_last_name}</Modal.Title>
+                    <Modal.Title>{student.name + " " + student.first_last_name + " " + student.second_last_name}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <CDBContainer fluid className="mb-4">
-                        <CDBBox display="flex" flex="fill" justifyContent="center">
-                            <img src={imageUser} style={{ height: '200px', width: '200px', borderRadius: '360px' }} />
+                    {isEditMode ? (
+                        <ModifyStudent student={student} showModal={isEditMode} handleClose={() => setIsEditMode(false)} />
+                    ) : (
+                        <CDBBox>
+                            <h6>Número de control</h6>
+                            <label>{student.control_number}</label>
+                            <h6>Semestre</h6>
+                            <label>{student.semester}</label>
+                            <h6>Carrera</h6>
+                            <label>{student && student.career && student.career.career}</label>
                         </CDBBox>
-                    </CDBContainer>
-                    <hr className="mx-5" />
-                    <TypeUser user={user} handleUpdateUsers={handleUpdateUsers} handleClose={handleClose} />
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <CDBBox display="flex" flex="fill" alignItems="center">
@@ -112,7 +96,7 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
                             <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
                         </CDBBox>
                         <CDBBox display="flex" flex="fill" justifyContent="end">
-                            <Button variant="outline-danger" className="me-2" onClick={() => confirmDeleteUser()}>Eliminar Usuario</Button>
+                            <Button variant="outline-danger" className="me-2" onClick={() => confirmDeleteStudent()}>Eliminar Usuario</Button>
                             <Button variant="primary" onClick={toggleEditMode}>
                                 Modificar Usuario
                             </Button>
@@ -126,4 +110,4 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
     )
 }
 
-export default ShowInfoUser
+export default ShowInfoStudent
