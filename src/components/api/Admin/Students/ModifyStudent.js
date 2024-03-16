@@ -100,8 +100,6 @@ const ModifyStudent = ({ student, showModal, handleClose, handleUpdateStudentInf
                 semester: form.semester,
                 career: selectedCareer,
             });
-    
-            console.log('Server response:', res);  // Agrega esta línea para imprimir la respuesta del servidor
             if (res.data) {  // Verifica si hay datos en la respuesta
                 toast.success("Alumno actualizado con éxito");
                 setForm({
@@ -112,7 +110,9 @@ const ModifyStudent = ({ student, showModal, handleClose, handleUpdateStudentInf
                     semester: "",
                     career: "",
                 });
+                window.location.reload();
                 handleClose();
+                
             } else {
                 toast.error("No se pudo actualizar el alumno. Inténtalo de nuevo más tarde.");
             }
@@ -120,13 +120,10 @@ const ModifyStudent = ({ student, showModal, handleClose, handleUpdateStudentInf
             console.error('Error al actualizar el alumno:', error);
     
             if (error.response) {
-                // La solicitud fue realizada y el servidor respondió con un código de estado que no está en el rango de 2xx
                 console.error('Respuesta del servidor:', error.response.data);
             } else if (error.request) {
-                // La solicitud fue realizada pero no se recibió respuesta del servidor
                 console.error('No se recibió respuesta del servidor');
             } else {
-                // Ocurrió un error durante la configuración de la solicitud
                 console.error('Error al configurar la solicitud:', error.message);
             }
     

@@ -9,7 +9,7 @@ import { ApiUrls } from "../../ApiUrls"
 import ModifyStudent from "./ModifyStudent";
 
 const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) => {
-
+    const showModal = false;
     const urls = useContext(ApiUrls)
     const [isEditMode, setIsEditMode] = useState(false);
     const toggleEditMode = () => {
@@ -39,7 +39,7 @@ const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) =
     const handleUpdateStudent = () => {
         handleUpdateStudents();  // Llama a la función de actualización en el padre
     };
-
+  
     const deleteStudent = async (id) => {
         const res = await axios.delete(urls.deleteStaff + id)
         if (res.data.affected === 1) {
@@ -62,8 +62,8 @@ const ShowInfoStudent = ({ show, handleClose, handleUpdateStudents, student }) =
                         {isEditMode ? (
                             <ModifyStudent student={student} showModal={isEditMode} handleClose={() => setIsEditMode(false)} />
                         ) : (
-                            <ShowInfoStudent student={student} handleUpdateStudents={handleUpdateStudents} handleClose={handleClose} />
-                        )}<ModifyStudent student={student} handleClose={handleClose} handleUpdateStudents={handleUpdateStudents} />
+                            <ShowInfoStudent show={showModal} handleClose={handleClose} handleUpdateStudents={handleUpdateStudents} student={student} />
+                        )}<ModifyStudent student={student} showModal={showModal} handleClose={handleClose} handleUpdateStudent={handleUpdateStudent} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>

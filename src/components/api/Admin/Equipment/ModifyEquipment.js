@@ -130,7 +130,7 @@ const ModifyEquipment = ({ equipment, showModal, handleClose }) => {
         } else {
             toast.error('No se pudo actualizar el equipo. Inténtalo de nuevo más tarde.');
         }
-    }
+    }   
     
     return (
 
