@@ -18,7 +18,7 @@ export const onlyNumbers = (value) => {
 
 export const validUserName = (value) => {
     let isValid = false
-    const regex = /^[\p{L}\p{N}\.\-_]+$/u
+    const regex = /^[\p{L}\p{N}.\-_]+$/u
     if (regex.test(value)) {
         isValid = true
     }

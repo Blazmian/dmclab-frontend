@@ -13,6 +13,7 @@ const Equipment = () => {
 
     useEffect(() => {
         getEquipment()
+        // eslint-disable-next-line
     }, [])
 
     async function getEquipment() {

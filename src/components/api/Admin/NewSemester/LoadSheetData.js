@@ -30,6 +30,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         if (Object.keys(sheetData).length > 0 && sheetNames.length > 0 && isVerifying) {
             collectData()
         }
+        // eslint-disable-next-line
     }, [sheetData])
 
     const collectData = () => {
@@ -54,6 +55,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         if (career.length > 0) {
             validateCareers()
         }
+        // eslint-disable-next-line
     }, [career])
 
     const validateCareers = async () => {
@@ -80,6 +82,8 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                     case "carrera":
                         newObject.career = career[key]
                         break;
+                        default:
+                            break;
                 }
             })
             return newObject
@@ -91,6 +95,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         if (teachers.length > 0) {
             validateTeachers()
         }
+        // eslint-disable-next-line
     }, [teachers])
 
     const validateTeachers = async () => {
@@ -133,6 +138,8 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                     case "pin":
                         newObject.pin = teacher[key]
                         break;
+                    default:
+                        break;
                 }
             })
             return newObject
@@ -145,6 +152,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         if (students.length > 0) {
             validateStudents()
         }
+        // eslint-disable-next-line
     }, [students])
 
     const validateStudents = async () => {
@@ -195,6 +203,9 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                     case "id carrera":
                         newObject.career = student[key]
                         break;
+
+                    default:
+                        break;
                 }
             })
             return newObject
@@ -217,6 +228,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         if (subjects.length > 0) {
             validateSubjects()
         }
+        // eslint-disable-next-line
     }, [subjects])
 
     const validateSubjects = async () => {
@@ -251,6 +263,9 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
                     case "id maestros":
                         newObject.teacher = subject[key]
                         break;
+
+                    default:
+                        break;
                 }
             })
             return newObject
@@ -262,6 +277,7 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
         if (enrolled.length > 0) {
             validateEnrolleds()
         }
+        // eslint-disable-next-line
     }, [enrolled])
 
     const validateEnrolleds = async () => {
@@ -291,6 +307,9 @@ const LoadSheetData = ({ sheetData, sheetNames }) => {
 
                     case "id materia":
                         newObject.subject = enrolled[key]
+                        break;
+
+                    default:
                         break;
                 }
             })

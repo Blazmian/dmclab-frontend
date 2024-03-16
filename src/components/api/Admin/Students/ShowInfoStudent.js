@@ -1,7 +1,6 @@
 import axios from "axios"
-import { CDBBox, CDBContainer } from "cdbreact"
-import { useContext, useEffect, useState } from "react"
-import UserDefaultImg from '../../../../img/user-default-image.jpg'
+import { CDBBox } from "cdbreact"
+import { useContext, useState } from "react"
 import { Button, Modal } from "react-bootstrap"
 import { toast } from "react-toastify"
 import Swal from "sweetalert2"

@@ -17,6 +17,7 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
 
     useEffect(() => {
         obtainImageEquipment()
+        // eslint-disable-next-line
     }, [equipment])
 
     const obtainImageEquipment = async () => {
@@ -140,7 +141,7 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
                     <CDBContainer fluid className="mb-4">
                         <CDBBox display="flex" flex="fill" justifyContent="start" alignItems="center">
                             <CDBBox className="me-4">
-                                <img src={imageEquipment} style={{ height: '100px', width: '100px', borderRadius: '360px' }} />
+                                <img src={imageEquipment} alt="imageEquipment" style={{ height: '100px', width: '100px', borderRadius: '360px' }} />
                             </CDBBox>
                             <CDBBox>
                                 <CDBBox display="flex" className="mb-1">
@@ -149,7 +150,7 @@ const ShowInfoEquipment = ({ show, handleClose, handleUpdateEquipment, equipment
                                 <CDBBox display="flex" alignItems="center">
                                     <div
                                         className="me-2"
-                                        style={{ width: '20px', height: '20px', borderRadius: '60px', ... (equipment.damaged ? { backgroundColor: 'red' } : equipment.borrowed ? { backgroundColor: 'rgb(247, 224, 12)' } : { backgroundColor: 'rgb(32, 167, 32)' }) }}
+                                        style={{ width: '20px', height: '20px', borderRadius: '60px', ...(equipment.damaged ? { backgroundColor: 'red' } : equipment.borrowed ? { backgroundColor: 'rgb(247, 224, 12)' } : { backgroundColor: 'rgb(32, 167, 32)' }) }}
                                     />
                                     {equipment.damaged ? 'Se encuentra dañado' : equipment.borrowed ? 'Se encuentra prestado' : 'En buen estado'}
                                 </CDBBox>

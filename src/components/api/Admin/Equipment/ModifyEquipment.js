@@ -15,6 +15,7 @@ const ModifyEquipment = ({ equipment, showModal, handleClose }) => {
         if (equipment.id) {
             obtainImageEquipment();
         }
+        // eslint-disable-next-line
     }, [equipment.id]);
     const obtainImageEquipment = async () => {
         if (equipment.length !== 0) {

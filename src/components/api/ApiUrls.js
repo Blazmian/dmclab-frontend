@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const host = "http://localhost:8000"
+const host = "https://dmclab.onrender.com"
 
 export const ApiUrls = createContext({
     // Staff

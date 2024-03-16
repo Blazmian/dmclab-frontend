@@ -24,6 +24,7 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
     };
     useEffect(() => {
         obtainImageUser()
+        // eslint-disable-next-line
     }, [user])
 
     const obtainImageUser = async () => {
@@ -100,7 +101,7 @@ const ShowInfoUser = ({ show, handleClose, handleUpdateUsers, user }) => {
                 <Modal.Body>
                     <CDBContainer fluid className="mb-4">
                         <CDBBox display="flex" flex="fill" justifyContent="center">
-                            <img src={imageUser} style={{ height: '200px', width: '200px', borderRadius: '360px' }} />
+                            <img src={imageUser} alt="imageUser" style={{ height: '200px', width: '200px', borderRadius: '360px' }} />
                         </CDBBox>
                     </CDBContainer>
                     <hr className="mx-5" />

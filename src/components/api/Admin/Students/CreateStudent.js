@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import UserDefaultImg from '../../../../img/user-default-image.jpg'
 import { onlyLetters } from '../../../../tools/InputValidator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -28,7 +27,7 @@ const CreateStudent = ({ show, handleClose, handleAddStudent }) => {
     }
 
     const validateForm = () => {
-        const { controlNumber, names, firstLastName, secondLastName } = form
+        const { names, firstLastName, secondLastName } = form
         const newErrors = {}
 
         if (!names || names === '') {

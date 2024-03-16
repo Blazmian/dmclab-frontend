@@ -104,10 +104,8 @@ const CreateEquipment = ({ show, handleClose, handleUpdateEquipment }) => {
     }
 
     const createEquipment = async () => {
-        var brand = '', model = '', projector = false, extension = false
+        let projector = false, extension = false
         if (selectedOption !== 'extension') {
-            brand = form.brand
-            model = form.model
             if (selectedOption === 'projector') {
                 projector = true
             }
@@ -154,11 +152,11 @@ const CreateEquipment = ({ show, handleClose, handleUpdateEquipment }) => {
         reader.readAsDataURL(file)
     }
 
-    const handleChangeEquipment = (event) => {
+    /*const handleChangeEquipment = (event) => {
         if (event.target.value !== "-1") {
             form.equipment = event.target.value
         }
-    }
+    }*/
 
     return (
         <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>

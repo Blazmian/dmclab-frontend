@@ -16,6 +16,7 @@ const Students = () => {
 
     useEffect(() => {
         getStudents()
+        // eslint-disable-next-line
     }, [])
 
     async function getStudents() {
@@ -32,9 +33,9 @@ const Students = () => {
 
     // For Add User Modal
     const [show, setShow] = useState(false);
-    const handleShow = () => {
+    /*const handleShow = () => {
         setShow(true)
-    }
+    }*/
     const handleClose = () => {
         setShow(false)
     }

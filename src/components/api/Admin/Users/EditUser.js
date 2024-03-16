@@ -15,6 +15,7 @@ const EditUser = ({ user, showModal, handleClose }) => {
         if (user.id) {
             obtainImageUser();
         }
+        // eslint-disable-next-line
     }, [user.id]);
     const obtainImageUser = async () => {
         if (user.length !== 0) {
